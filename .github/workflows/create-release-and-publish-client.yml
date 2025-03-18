@@ -113,7 +113,7 @@ jobs:
         run: dotnet restore
 
       - name: Build solution
-        run: dotnet build Moira.ApiClient.sln --configuration Release
+        run: dotnet build Moira.ApiClient.sln --configuration Release --no-restore
 
       - name: Create temp directory
         run: mkdir ./.temp/
