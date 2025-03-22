@@ -1,4 +1,4 @@
-﻿name: Create Release and Publish package
+name: Create Release and Publish package
 
 on:
   workflow_dispatch:
@@ -86,8 +86,17 @@ jobs:
     needs: create-tag
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: '0'
+
+      - name: Switch to commit
+        if: github.event.inputs.commit_hash != 'latest'
+        run: git reset $COMMIT_HASH --hard
+        env:
+          COMMIT_HASH: ${{ github.event.inputs.commit_hash }}
 
       - name: Check for open Pull requests
+        if: github.event.inputs.commit_hash == 'latest'
         run: |
           PULLS=$(gh api \
             -H "Accept: application/vnd.github+json" \
