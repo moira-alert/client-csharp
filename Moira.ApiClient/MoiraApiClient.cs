@@ -10,6 +10,7 @@ using Moira.ApiClient.Health;
 using Moira.ApiClient.Notification;
 using Moira.ApiClient.Pattern;
 using Moira.ApiClient.Subscription;
+using Moira.ApiClient.SystemTag;
 using Moira.ApiClient.Tag;
 using Moira.ApiClient.Teams;
 using Moira.ApiClient.Trigger;
@@ -60,6 +61,11 @@ namespace Moira.ApiClient
         public global::Moira.ApiClient.Subscription.SubscriptionRequestBuilder Subscription
         {
             get => new global::Moira.ApiClient.Subscription.SubscriptionRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The systemTag property</summary>
+        public global::Moira.ApiClient.SystemTag.SystemTagRequestBuilder SystemTag
+        {
+            get => new global::Moira.ApiClient.SystemTag.SystemTagRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>The tag property</summary>
         public global::Moira.ApiClient.Tag.TagRequestBuilder Tag
