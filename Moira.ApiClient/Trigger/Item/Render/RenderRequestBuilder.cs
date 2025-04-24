@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions.Serialization;
 using Microsoft.Kiota.Abstractions;
+using Moira.ApiClient.Models.Api;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -38,6 +39,9 @@ namespace Moira.ApiClient.Trigger.Item.Render
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorResponse">When receiving a 400 status code</exception>
+        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorResponse">When receiving a 404 status code</exception>
+        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorResponse">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<Stream?> GetAsync(Action<RequestConfiguration<global::Moira.ApiClient.Trigger.Item.Render.RenderRequestBuilder.RenderRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -48,7 +52,13 @@ namespace Moira.ApiClient.Trigger.Item.Render
         {
 #endif
             var requestInfo = ToGetRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "400", global::Moira.ApiClient.Models.Api.ErrorResponse.CreateFromDiscriminatorValue },
+                { "404", global::Moira.ApiClient.Models.Api.ErrorResponse.CreateFromDiscriminatorValue },
+                { "500", global::Moira.ApiClient.Models.Api.ErrorResponse.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Render trigger metrics plot
@@ -66,7 +76,7 @@ namespace Moira.ApiClient.Trigger.Item.Render
 #endif
             var requestInfo = new RequestInformation(Method.GET, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
-            requestInfo.Headers.TryAdd("Accept", "image/png");
+            requestInfo.Headers.TryAdd("Accept", "image/png, application/json");
             return requestInfo;
         }
         /// <summary>

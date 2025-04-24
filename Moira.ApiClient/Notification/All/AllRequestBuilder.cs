@@ -40,8 +40,8 @@ namespace Moira.ApiClient.Notification.All
         /// <returns>A <see cref="global::Moira.ApiClient.Models.Dto.NotificationsList"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorForbiddenExample">When receiving a 403 status code</exception>
-        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorInternalServerExample">When receiving a 500 status code</exception>
+        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorResponse">When receiving a 403 status code</exception>
+        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorResponse">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Moira.ApiClient.Models.Dto.NotificationsList?> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -54,8 +54,8 @@ namespace Moira.ApiClient.Notification.All
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "403", global::Moira.ApiClient.Models.Api.ErrorForbiddenExample.CreateFromDiscriminatorValue },
-                { "500", global::Moira.ApiClient.Models.Api.ErrorInternalServerExample.CreateFromDiscriminatorValue },
+                { "403", global::Moira.ApiClient.Models.Api.ErrorResponse.CreateFromDiscriminatorValue },
+                { "500", global::Moira.ApiClient.Models.Api.ErrorResponse.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Moira.ApiClient.Models.Dto.NotificationsList>(requestInfo, global::Moira.ApiClient.Models.Dto.NotificationsList.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

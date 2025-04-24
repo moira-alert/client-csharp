@@ -44,7 +44,7 @@ namespace Moira.ApiClient.Models.Moira
 #else
         public global::Moira.ApiClient.Models.Moira.PlottingData Plotting { get; set; }
 #endif
-        /// <summary>The sched property</summary>
+        /// <summary>Determines when Moira should monitor trigger</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public global::Moira.ApiClient.Models.Moira.ScheduleData? Sched { get; set; }
