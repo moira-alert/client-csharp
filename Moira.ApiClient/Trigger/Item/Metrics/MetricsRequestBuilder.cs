@@ -43,29 +43,29 @@ namespace Moira.ApiClient.Trigger.Item.Metrics
         /// <summary>
         /// Delete metric from last check and all trigger pattern metrics
         /// </summary>
-        /// <returns>A <see cref="Stream"/></returns>
+        /// <returns>A <see cref="global::Moira.ApiClient.Trigger.Item.Metrics.MetricsDeleteResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorInvalidRequestExample">When receiving a 400 status code</exception>
-        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorNotFoundExample">When receiving a 404 status code</exception>
-        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorInternalServerExample">When receiving a 500 status code</exception>
+        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorResponse">When receiving a 400 status code</exception>
+        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorResponse">When receiving a 404 status code</exception>
+        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorResponse">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
-        public async Task<Stream?> DeleteAsync(Action<RequestConfiguration<global::Moira.ApiClient.Trigger.Item.Metrics.MetricsRequestBuilder.MetricsRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Moira.ApiClient.Trigger.Item.Metrics.MetricsDeleteResponse?> DeleteAsync(Action<RequestConfiguration<global::Moira.ApiClient.Trigger.Item.Metrics.MetricsRequestBuilder.MetricsRequestBuilderDeleteQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #nullable restore
 #else
-        public async Task<Stream> DeleteAsync(Action<RequestConfiguration<global::Moira.ApiClient.Trigger.Item.Metrics.MetricsRequestBuilder.MetricsRequestBuilderDeleteQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
+        public async Task<global::Moira.ApiClient.Trigger.Item.Metrics.MetricsDeleteResponse> DeleteAsync(Action<RequestConfiguration<global::Moira.ApiClient.Trigger.Item.Metrics.MetricsRequestBuilder.MetricsRequestBuilderDeleteQueryParameters>> requestConfiguration = default, CancellationToken cancellationToken = default)
         {
 #endif
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Moira.ApiClient.Models.Api.ErrorInvalidRequestExample.CreateFromDiscriminatorValue },
-                { "404", global::Moira.ApiClient.Models.Api.ErrorNotFoundExample.CreateFromDiscriminatorValue },
-                { "500", global::Moira.ApiClient.Models.Api.ErrorInternalServerExample.CreateFromDiscriminatorValue },
+                { "400", global::Moira.ApiClient.Models.Api.ErrorResponse.CreateFromDiscriminatorValue },
+                { "404", global::Moira.ApiClient.Models.Api.ErrorResponse.CreateFromDiscriminatorValue },
+                { "500", global::Moira.ApiClient.Models.Api.ErrorResponse.CreateFromDiscriminatorValue },
             };
-            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
+            return await RequestAdapter.SendAsync<global::Moira.ApiClient.Trigger.Item.Metrics.MetricsDeleteResponse>(requestInfo, global::Moira.ApiClient.Trigger.Item.Metrics.MetricsDeleteResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Get metrics associated with certain trigger
@@ -73,10 +73,10 @@ namespace Moira.ApiClient.Trigger.Item.Metrics
         /// <returns>A <see cref="global::Moira.ApiClient.Models.Dto.TriggerMetrics"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorInvalidRequestExample">When receiving a 400 status code</exception>
-        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorNotFoundExample">When receiving a 404 status code</exception>
-        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorRenderExample">When receiving a 422 status code</exception>
-        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorInternalServerExample">When receiving a 500 status code</exception>
+        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorResponse">When receiving a 400 status code</exception>
+        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorResponse">When receiving a 404 status code</exception>
+        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorResponse">When receiving a 422 status code</exception>
+        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorResponse">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Moira.ApiClient.Models.Dto.TriggerMetrics?> GetAsync(Action<RequestConfiguration<global::Moira.ApiClient.Trigger.Item.Metrics.MetricsRequestBuilder.MetricsRequestBuilderGetQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -89,10 +89,10 @@ namespace Moira.ApiClient.Trigger.Item.Metrics
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "400", global::Moira.ApiClient.Models.Api.ErrorInvalidRequestExample.CreateFromDiscriminatorValue },
-                { "404", global::Moira.ApiClient.Models.Api.ErrorNotFoundExample.CreateFromDiscriminatorValue },
-                { "422", global::Moira.ApiClient.Models.Api.ErrorRenderExample.CreateFromDiscriminatorValue },
-                { "500", global::Moira.ApiClient.Models.Api.ErrorInternalServerExample.CreateFromDiscriminatorValue },
+                { "400", global::Moira.ApiClient.Models.Api.ErrorResponse.CreateFromDiscriminatorValue },
+                { "404", global::Moira.ApiClient.Models.Api.ErrorResponse.CreateFromDiscriminatorValue },
+                { "422", global::Moira.ApiClient.Models.Api.ErrorResponse.CreateFromDiscriminatorValue },
+                { "500", global::Moira.ApiClient.Models.Api.ErrorResponse.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Moira.ApiClient.Models.Dto.TriggerMetrics>(requestInfo, global::Moira.ApiClient.Models.Dto.TriggerMetrics.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }

@@ -40,6 +40,8 @@ namespace Moira.ApiClient.Trigger.Item.Throttling
         /// <returns>A <see cref="Stream"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
+        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorResponse">When receiving a 404 status code</exception>
+        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorResponse">When receiving a 500 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<Stream?> DeleteAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -50,7 +52,12 @@ namespace Moira.ApiClient.Trigger.Item.Throttling
         {
 #endif
             var requestInfo = ToDeleteRequestInformation(requestConfiguration);
-            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, default, cancellationToken).ConfigureAwait(false);
+            var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
+            {
+                { "404", global::Moira.ApiClient.Models.Api.ErrorResponse.CreateFromDiscriminatorValue },
+                { "500", global::Moira.ApiClient.Models.Api.ErrorResponse.CreateFromDiscriminatorValue },
+            };
+            return await RequestAdapter.SendPrimitiveAsync<Stream>(requestInfo, errorMapping, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
         /// Get a trigger with its throttling i.e its next allowed message time
@@ -58,8 +65,8 @@ namespace Moira.ApiClient.Trigger.Item.Throttling
         /// <returns>A <see cref="global::Moira.ApiClient.Models.Dto.ThrottlingResponse"/></returns>
         /// <param name="cancellationToken">Cancellation token to use when cancelling requests</param>
         /// <param name="requestConfiguration">Configuration for the request such as headers, query parameters, and middleware options.</param>
-        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorNotFoundExample">When receiving a 404 status code</exception>
-        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorRenderExample">When receiving a 422 status code</exception>
+        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorResponse">When receiving a 404 status code</exception>
+        /// <exception cref="global::Moira.ApiClient.Models.Api.ErrorResponse">When receiving a 422 status code</exception>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
         public async Task<global::Moira.ApiClient.Models.Dto.ThrottlingResponse?> GetAsync(Action<RequestConfiguration<DefaultQueryParameters>>? requestConfiguration = default, CancellationToken cancellationToken = default)
@@ -72,8 +79,8 @@ namespace Moira.ApiClient.Trigger.Item.Throttling
             var requestInfo = ToGetRequestInformation(requestConfiguration);
             var errorMapping = new Dictionary<string, ParsableFactory<IParsable>>
             {
-                { "404", global::Moira.ApiClient.Models.Api.ErrorNotFoundExample.CreateFromDiscriminatorValue },
-                { "422", global::Moira.ApiClient.Models.Api.ErrorRenderExample.CreateFromDiscriminatorValue },
+                { "404", global::Moira.ApiClient.Models.Api.ErrorResponse.CreateFromDiscriminatorValue },
+                { "422", global::Moira.ApiClient.Models.Api.ErrorResponse.CreateFromDiscriminatorValue },
             };
             return await RequestAdapter.SendAsync<global::Moira.ApiClient.Models.Dto.ThrottlingResponse>(requestInfo, global::Moira.ApiClient.Models.Dto.ThrottlingResponse.CreateFromDiscriminatorValue, errorMapping, cancellationToken).ConfigureAwait(false);
         }
@@ -93,7 +100,7 @@ namespace Moira.ApiClient.Trigger.Item.Throttling
 #endif
             var requestInfo = new RequestInformation(Method.DELETE, UrlTemplate, PathParameters);
             requestInfo.Configure(requestConfiguration);
-            requestInfo.Headers.TryAdd("Accept", "application/octet-stream");
+            requestInfo.Headers.TryAdd("Accept", "application/json");
             return requestInfo;
         }
         /// <summary>
