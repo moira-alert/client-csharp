@@ -3,6 +3,7 @@
 using Microsoft.Kiota.Abstractions.Extensions;
 using Microsoft.Kiota.Abstractions;
 using Moira.ApiClient.Health.Notifier;
+using Moira.ApiClient.Health.SystemSubscriptions;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -19,6 +20,11 @@ namespace Moira.ApiClient.Health
         public global::Moira.ApiClient.Health.Notifier.NotifierRequestBuilder Notifier
         {
             get => new global::Moira.ApiClient.Health.Notifier.NotifierRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The systemSubscriptions property</summary>
+        public global::Moira.ApiClient.Health.SystemSubscriptions.SystemSubscriptionsRequestBuilder SystemSubscriptions
+        {
+            get => new global::Moira.ApiClient.Health.SystemSubscriptions.SystemSubscriptionsRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Moira.ApiClient.Health.HealthRequestBuilder"/> and sets the default values.

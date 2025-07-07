@@ -28,6 +28,8 @@ namespace Moira.ApiClient.Models.Api
 #else
         public string ClusterName { get; set; }
 #endif
+        /// <summary>The metrics_ttl property</summary>
+        public int? MetricsTtl { get; set; }
         /// <summary>The trigger_source property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -56,6 +58,7 @@ namespace Moira.ApiClient.Models.Api
             {
                 { "cluster_id", n => { ClusterId = n.GetStringValue(); } },
                 { "cluster_name", n => { ClusterName = n.GetStringValue(); } },
+                { "metrics_ttl", n => { MetricsTtl = n.GetIntValue(); } },
                 { "trigger_source", n => { TriggerSource = n.GetStringValue(); } },
             };
         }
@@ -68,6 +71,7 @@ namespace Moira.ApiClient.Models.Api
             _ = writer ?? throw new ArgumentNullException(nameof(writer));
             writer.WriteStringValue("cluster_id", ClusterId);
             writer.WriteStringValue("cluster_name", ClusterName);
+            writer.WriteIntValue("metrics_ttl", MetricsTtl);
             writer.WriteStringValue("trigger_source", TriggerSource);
         }
     }

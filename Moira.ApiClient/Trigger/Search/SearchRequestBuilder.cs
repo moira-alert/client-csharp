@@ -29,7 +29,7 @@ namespace Moira.ApiClient.Trigger.Search
         /// </summary>
         /// <param name="pathParameters">Path parameters for the request</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public SearchRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/trigger/search{?createPager*,createdBy*,onlyProblems*,p*,pagerID*,size*,text*}", pathParameters)
+        public SearchRequestBuilder(Dictionary<string, object> pathParameters, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/trigger/search{?createPager*,createdBy*,onlyProblems*,p*,pagerID*,size*,tags*,text*}", pathParameters)
         {
         }
         /// <summary>
@@ -37,7 +37,7 @@ namespace Moira.ApiClient.Trigger.Search
         /// </summary>
         /// <param name="rawUrl">The raw URL to use for the request builder.</param>
         /// <param name="requestAdapter">The request adapter to use to execute the requests.</param>
-        public SearchRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/trigger/search{?createPager*,createdBy*,onlyProblems*,p*,pagerID*,size*,text*}", rawUrl)
+        public SearchRequestBuilder(string rawUrl, IRequestAdapter requestAdapter) : base(requestAdapter, "{+baseurl}/trigger/search{?createPager*,createdBy*,onlyProblems*,p*,pagerID*,size*,tags*,text*}", rawUrl)
         {
         }
         /// <summary>
@@ -135,6 +135,16 @@ namespace Moira.ApiClient.Trigger.Search
             /// <summary>Page size</summary>
             [QueryParameter("size")]
             public int? Size { get; set; }
+            /// <summary>Search tag</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+            [QueryParameter("tags")]
+            public string[]? Tags { get; set; }
+#nullable restore
+#else
+            [QueryParameter("tags")]
+            public string[] Tags { get; set; }
+#endif
             /// <summary>Search text</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
