@@ -6,6 +6,7 @@ using Microsoft.Kiota.Abstractions;
 using Moira.ApiClient.Models.Api;
 using Moira.ApiClient.Models.Dto;
 using Moira.ApiClient.Notification.All;
+using Moira.ApiClient.Notification.Filtered;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -23,6 +24,11 @@ namespace Moira.ApiClient.Notification
         public global::Moira.ApiClient.Notification.All.AllRequestBuilder All
         {
             get => new global::Moira.ApiClient.Notification.All.AllRequestBuilder(PathParameters, RequestAdapter);
+        }
+        /// <summary>The filtered property</summary>
+        public global::Moira.ApiClient.Notification.Filtered.FilteredRequestBuilder Filtered
+        {
+            get => new global::Moira.ApiClient.Notification.Filtered.FilteredRequestBuilder(PathParameters, RequestAdapter);
         }
         /// <summary>
         /// Instantiates a new <see cref="global::Moira.ApiClient.Notification.NotificationRequestBuilder"/> and sets the default values.

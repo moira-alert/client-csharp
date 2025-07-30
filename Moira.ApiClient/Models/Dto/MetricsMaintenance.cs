@@ -9,28 +9,18 @@ namespace Moira.ApiClient.Models.Dto
 {
     [global::System.CodeDom.Compiler.GeneratedCode("Kiota", "1.0.0")]
     #pragma warning disable CS1591
-    public partial class TriggerMaintenance : IParsable
+    public partial class MetricsMaintenance : IParsable
     #pragma warning restore CS1591
     {
-        /// <summary>The metrics property</summary>
-#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
-#nullable enable
-        public global::Moira.ApiClient.Models.Dto.MetricsMaintenance? Metrics { get; set; }
-#nullable restore
-#else
-        public global::Moira.ApiClient.Models.Dto.MetricsMaintenance Metrics { get; set; }
-#endif
-        /// <summary>The trigger property</summary>
-        public long? Trigger { get; set; }
         /// <summary>
         /// Creates a new instance of the appropriate class based on discriminator value
         /// </summary>
-        /// <returns>A <see cref="global::Moira.ApiClient.Models.Dto.TriggerMaintenance"/></returns>
+        /// <returns>A <see cref="global::Moira.ApiClient.Models.Dto.MetricsMaintenance"/></returns>
         /// <param name="parseNode">The parse node to use to read the discriminator value and create the object</param>
-        public static global::Moira.ApiClient.Models.Dto.TriggerMaintenance CreateFromDiscriminatorValue(IParseNode parseNode)
+        public static global::Moira.ApiClient.Models.Dto.MetricsMaintenance CreateFromDiscriminatorValue(IParseNode parseNode)
         {
             _ = parseNode ?? throw new ArgumentNullException(nameof(parseNode));
-            return new global::Moira.ApiClient.Models.Dto.TriggerMaintenance();
+            return new global::Moira.ApiClient.Models.Dto.MetricsMaintenance();
         }
         /// <summary>
         /// The deserialization information for the current model
@@ -40,8 +30,6 @@ namespace Moira.ApiClient.Models.Dto
         {
             return new Dictionary<string, Action<IParseNode>>
             {
-                { "metrics", n => { Metrics = n.GetObjectValue<global::Moira.ApiClient.Models.Dto.MetricsMaintenance>(global::Moira.ApiClient.Models.Dto.MetricsMaintenance.CreateFromDiscriminatorValue); } },
-                { "trigger", n => { Trigger = n.GetLongValue(); } },
             };
         }
         /// <summary>
@@ -51,8 +39,6 @@ namespace Moira.ApiClient.Models.Dto
         public virtual void Serialize(ISerializationWriter writer)
         {
             _ = writer ?? throw new ArgumentNullException(nameof(writer));
-            writer.WriteObjectValue<global::Moira.ApiClient.Models.Dto.MetricsMaintenance>("metrics", Metrics);
-            writer.WriteLongValue("trigger", Trigger);
         }
     }
 }

@@ -14,6 +14,14 @@ namespace Moira.ApiClient.Models.Dto
     {
         /// <summary>EventsCount for the contact.</summary>
         public int? EventsCount { get; set; }
+        /// <summary>The extra_message property</summary>
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
+#nullable enable
+        public string? ExtraMessage { get; set; }
+#nullable restore
+#else
+        public string ExtraMessage { get; set; }
+#endif
         /// <summary>The id property</summary>
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
 #nullable enable
@@ -81,6 +89,7 @@ namespace Moira.ApiClient.Models.Dto
             return new Dictionary<string, Action<IParseNode>>
             {
                 { "events_count", n => { EventsCount = n.GetIntValue(); } },
+                { "extra_message", n => { ExtraMessage = n.GetStringValue(); } },
                 { "id", n => { Id = n.GetStringValue(); } },
                 { "name", n => { Name = n.GetStringValue(); } },
                 { "team_id", n => { TeamId = n.GetStringValue(); } },
@@ -97,6 +106,7 @@ namespace Moira.ApiClient.Models.Dto
         {
             _ = writer ?? throw new ArgumentNullException(nameof(writer));
             writer.WriteIntValue("events_count", EventsCount);
+            writer.WriteStringValue("extra_message", ExtraMessage);
             writer.WriteStringValue("id", Id);
             writer.WriteStringValue("name", Name);
             writer.WriteStringValue("team_id", TeamId);
