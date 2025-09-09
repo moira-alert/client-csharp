@@ -109,11 +109,6 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
 
-      - name: Set .csproj version
-        run: sed -i -E "s/(\s*)<Version>[0-9]+\.[0-9]+\.[0-9]+<\/Version>/\1<Version>$VERSION_TAG<\/Version>/g" ./Moira.ApiClient/Moira.ApiClient.csproj
-        env:
-          VERSION_TAG: ${{ github.event.inputs.version_tag }}
-
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
@@ -128,7 +123,9 @@ jobs:
         run: mkdir ./.temp/
 
       - name: Pack solution
-        run: dotnet pack --no-build --configuration Release --output ./.temp/
+        run: dotnet pack --no-build --configuration Release --output ./.temp/ /p:PackageVersion=$VERSION_TAG
+        env:
+          VERSION_TAG: ${{ github.event.inputs.version_tag }}
 
       - name: Create GitHub release
         run: gh release create v$VERSION_TAG --title v$VERSION_TAG --verify-tag

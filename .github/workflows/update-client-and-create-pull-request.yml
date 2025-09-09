@@ -26,18 +26,6 @@ jobs:
       - name: Create temp directory
         run: mkdir ./.temp/
 
-      - name: Download Moira OpenAPI Specification
-        run: wget -O ./.temp/moira-openapi-spec.yaml --header=accept:application/yaml $MOIRA_OPENAPI_SPEC_FETCH_URI/$SWAGGER_HUB_BRANCH
-        env:
-          MOIRA_OPENAPI_SPEC_FETCH_URI: ${{ vars.MOIRA_OPENAPI_SPEC_FETCH_URI }}
-          SWAGGER_HUB_BRANCH: ${{ github.event.inputs.swagger_hub_branch }}
-
-      - name: Setup Kiota
-        uses: microsoft/setup-kiota@v0.5.0
-        with:
-          version: latest
-          includePreRelease: "false"
-
       - name: Setup Git config and checkout branch
         run: |
           git config --local user.name "github-actions[bot]"
@@ -46,8 +34,32 @@ jobs:
           git checkout -b $BRANCH_NAME
           echo "BRANCH_NAME=$BRANCH_NAME" >> "$GITHUB_ENV"
 
+      - name: Download Moira OpenAPI Specification
+        run: wget -O ./.temp/openapi.yaml --header=accept:application/yaml $MOIRA_OPENAPI_SPEC_FETCH_URI/$SWAGGER_HUB_BRANCH
+        env:
+          MOIRA_OPENAPI_SPEC_FETCH_URI: ${{ vars.MOIRA_OPENAPI_SPEC_FETCH_URI }}
+          SWAGGER_HUB_BRANCH: ${{ github.event.inputs.swagger_hub_branch }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+
+      - name: Setup OpenAPI Generator tool
+        run: |
+          npm install @openapitools/openapi-generator-cli -g
+          openapi-generator-cli version-manager set 7.14.0
+
+      - name: Setup generation config file
+        run: |
+          cat > ./.temp/config.json <<EOF
+          {
+            "packageName": "Moira.ApiClient",
+            "apiName": "MoiraApiClient",
+            "targetFramework": "netstandard2.1"
+          }
+          EOF
+
       - name: Update client
-        run: kiota update --output ./Moira.ApiClient/
+        run: npx @openapitools/openapi-generator-cli generate -i ./.temp/openapi.yaml -o ./ -g csharp -c ./.temp/config.json
 
       - name: Commit changes
         run: |
