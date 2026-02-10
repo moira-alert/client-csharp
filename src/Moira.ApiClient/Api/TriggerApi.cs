@@ -520,7 +520,7 @@ namespace Moira.ApiClient.Api
     /// <summary>
     /// The <see cref="ICreateTriggerApiResponse"/>
     /// </summary>
-    public interface ICreateTriggerApiResponse : Moira.ApiClient.Client.IApiResponse, IOk<Moira.ApiClient.Model.DtoSaveTriggerResponse>, IBadRequest<Object>, IUnprocessableContent<Moira.ApiClient.Model.ApiErrorResponse>, IInternalServerError<Moira.ApiClient.Model.ApiErrorResponse>, IServiceUnavailable<Moira.ApiClient.Model.ApiErrorResponse>
+    public interface ICreateTriggerApiResponse : Moira.ApiClient.Client.IApiResponse, IOk<Moira.ApiClient.Model.DtoSaveTriggerResponse>, IBadRequest<Moira.ApiClient.Model.ApiErrorResponse>, ICustomHttpStatusCode418<Moira.ApiClient.Model.DtoSaveTriggerResponse>, IUnprocessableContent<Moira.ApiClient.Model.ApiErrorResponse>, IInternalServerError<Moira.ApiClient.Model.ApiErrorResponse>, IServiceUnavailable<Moira.ApiClient.Model.ApiErrorResponse>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -533,6 +533,12 @@ namespace Moira.ApiClient.Api
         /// </summary>
         /// <returns></returns>
         bool IsBadRequest { get; }
+
+        /// <summary>
+        /// Returns true if the response is 418 CustomHttpStatusCode418
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode418 { get; }
 
         /// <summary>
         /// Returns true if the response is 422 UnprocessableContent
@@ -1042,7 +1048,7 @@ namespace Moira.ApiClient.Api
     /// <summary>
     /// The <see cref="IUpdateTriggerApiResponse"/>
     /// </summary>
-    public interface IUpdateTriggerApiResponse : Moira.ApiClient.Client.IApiResponse, IOk<Moira.ApiClient.Model.DtoSaveTriggerResponse>, IBadRequest<Moira.ApiClient.Model.ApiErrorResponse>, INotFound<Moira.ApiClient.Model.ApiErrorResponse>, IUnprocessableContent<Moira.ApiClient.Model.ApiErrorResponse>, IInternalServerError<Moira.ApiClient.Model.ApiErrorResponse>, IServiceUnavailable<Moira.ApiClient.Model.ApiErrorResponse>
+    public interface IUpdateTriggerApiResponse : Moira.ApiClient.Client.IApiResponse, IOk<Moira.ApiClient.Model.DtoSaveTriggerResponse>, IBadRequest<Moira.ApiClient.Model.ApiErrorResponse>, INotFound<Moira.ApiClient.Model.ApiErrorResponse>, ICustomHttpStatusCode418<Moira.ApiClient.Model.DtoSaveTriggerResponse>, IUnprocessableContent<Moira.ApiClient.Model.ApiErrorResponse>, IInternalServerError<Moira.ApiClient.Model.ApiErrorResponse>, IServiceUnavailable<Moira.ApiClient.Model.ApiErrorResponse>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -1061,6 +1067,12 @@ namespace Moira.ApiClient.Api
         /// </summary>
         /// <returns></returns>
         bool IsNotFound { get; }
+
+        /// <summary>
+        /// Returns true if the response is 418 CustomHttpStatusCode418
+        /// </summary>
+        /// <returns></returns>
+        bool IsCustomHttpStatusCode418 { get; }
 
         /// <summary>
         /// Returns true if the response is 422 UnprocessableContent
@@ -1750,11 +1762,11 @@ namespace Moira.ApiClient.Api
             /// Deserializes the response if the response is 400 BadRequest
             /// </summary>
             /// <returns></returns>
-            public Object BadRequest()
+            public Moira.ApiClient.Model.ApiErrorResponse BadRequest()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsBadRequest
-                    ? System.Text.Json.JsonSerializer.Deserialize<Object>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<Moira.ApiClient.Model.ApiErrorResponse>(RawContent, _jsonSerializerOptions)
                     : default;
             }
 
@@ -1763,7 +1775,7 @@ namespace Moira.ApiClient.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryBadRequest(out Object result)
+            public bool TryBadRequest(out Moira.ApiClient.Model.ApiErrorResponse result)
             {
                 result = null;
 
@@ -1773,6 +1785,44 @@ namespace Moira.ApiClient.Api
                 } catch (Exception e)
                 {
                     OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)400);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 418 CustomHttpStatusCode418
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode418 => 418 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 418 CustomHttpStatusCode418
+            /// </summary>
+            /// <returns></returns>
+            public Moira.ApiClient.Model.DtoSaveTriggerResponse CustomHttpStatusCode418()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode418
+                    ? System.Text.Json.JsonSerializer.Deserialize<Moira.ApiClient.Model.DtoSaveTriggerResponse>(RawContent, _jsonSerializerOptions)
+                    : default;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 418 CustomHttpStatusCode418 and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode418(out Moira.ApiClient.Model.DtoSaveTriggerResponse result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode418();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)418);
                 }
 
                 return result != null;
@@ -7926,6 +7976,44 @@ namespace Moira.ApiClient.Api
                 } catch (Exception e)
                 {
                     OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)404);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 418 CustomHttpStatusCode418
+            /// </summary>
+            /// <returns></returns>
+            public bool IsCustomHttpStatusCode418 => 418 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 418 CustomHttpStatusCode418
+            /// </summary>
+            /// <returns></returns>
+            public Moira.ApiClient.Model.DtoSaveTriggerResponse CustomHttpStatusCode418()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsCustomHttpStatusCode418
+                    ? System.Text.Json.JsonSerializer.Deserialize<Moira.ApiClient.Model.DtoSaveTriggerResponse>(RawContent, _jsonSerializerOptions)
+                    : default;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 418 CustomHttpStatusCode418 and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryCustomHttpStatusCode418(out Moira.ApiClient.Model.DtoSaveTriggerResponse result)
+            {
+                result = null;
+
+                try
+                {
+                    result = CustomHttpStatusCode418();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)418);
                 }
 
                 return result != null;

@@ -33,10 +33,16 @@ namespace Moira.ApiClient.Model
         /// Initializes a new instance of the <see cref="DtoContactEventItemList" /> class.
         /// </summary>
         /// <param name="list">list</param>
+        /// <param name="page">page</param>
+        /// <param name="size">size</param>
+        /// <param name="total">total</param>
         [JsonConstructor]
-        public DtoContactEventItemList(List<DtoContactEventItem> list)
+        public DtoContactEventItemList(List<DtoContactEventItem> list, long page, long size, long total)
         {
             List = list;
+            Page = page;
+            Size = size;
+            Total = total;
             OnCreated();
         }
 
@@ -49,6 +55,27 @@ namespace Moira.ApiClient.Model
         public List<DtoContactEventItem> List { get; set; }
 
         /// <summary>
+        /// Gets or Sets Page
+        /// </summary>
+        /* <example>0</example> */
+        [JsonPropertyName("page")]
+        public long Page { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Size
+        /// </summary>
+        /* <example>100</example> */
+        [JsonPropertyName("size")]
+        public long Size { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Total
+        /// </summary>
+        /* <example>10</example> */
+        [JsonPropertyName("total")]
+        public long Total { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -57,6 +84,9 @@ namespace Moira.ApiClient.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class DtoContactEventItemList {\n");
             sb.Append("  List: ").Append(List).Append("\n");
+            sb.Append("  Page: ").Append(Page).Append("\n");
+            sb.Append("  Size: ").Append(Size).Append("\n");
+            sb.Append("  Total: ").Append(Total).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,6 +125,9 @@ namespace Moira.ApiClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<List<DtoContactEventItem>> list = default;
+            Option<long?> page = default;
+            Option<long?> size = default;
+            Option<long?> total = default;
 
             while (utf8JsonReader.Read())
             {
@@ -114,6 +147,15 @@ namespace Moira.ApiClient.Model
                         case "list":
                             list = new Option<List<DtoContactEventItem>>(JsonSerializer.Deserialize<List<DtoContactEventItem>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
+                        case "page":
+                            page = new Option<long?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (long?)null : utf8JsonReader.GetInt64());
+                            break;
+                        case "size":
+                            size = new Option<long?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (long?)null : utf8JsonReader.GetInt64());
+                            break;
+                        case "total":
+                            total = new Option<long?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (long?)null : utf8JsonReader.GetInt64());
+                            break;
                         default:
                             break;
                     }
@@ -123,10 +165,28 @@ namespace Moira.ApiClient.Model
             if (!list.IsSet)
                 throw new ArgumentException("Property is required for class DtoContactEventItemList.", nameof(list));
 
+            if (!page.IsSet)
+                throw new ArgumentException("Property is required for class DtoContactEventItemList.", nameof(page));
+
+            if (!size.IsSet)
+                throw new ArgumentException("Property is required for class DtoContactEventItemList.", nameof(size));
+
+            if (!total.IsSet)
+                throw new ArgumentException("Property is required for class DtoContactEventItemList.", nameof(total));
+
             if (list.IsSet && list.Value == null)
                 throw new ArgumentNullException(nameof(list), "Property is not nullable for class DtoContactEventItemList.");
 
-            return new DtoContactEventItemList(list.Value);
+            if (page.IsSet && page.Value == null)
+                throw new ArgumentNullException(nameof(page), "Property is not nullable for class DtoContactEventItemList.");
+
+            if (size.IsSet && size.Value == null)
+                throw new ArgumentNullException(nameof(size), "Property is not nullable for class DtoContactEventItemList.");
+
+            if (total.IsSet && total.Value == null)
+                throw new ArgumentNullException(nameof(total), "Property is not nullable for class DtoContactEventItemList.");
+
+            return new DtoContactEventItemList(list.Value, page.Value.Value, size.Value.Value, total.Value.Value);
         }
 
         /// <summary>
@@ -158,6 +218,11 @@ namespace Moira.ApiClient.Model
 
             writer.WritePropertyName("list");
             JsonSerializer.Serialize(writer, dtoContactEventItemList.List, jsonSerializerOptions);
+            writer.WriteNumber("page", dtoContactEventItemList.Page);
+
+            writer.WriteNumber("size", dtoContactEventItemList.Size);
+
+            writer.WriteNumber("total", dtoContactEventItemList.Total);
         }
     }
 }

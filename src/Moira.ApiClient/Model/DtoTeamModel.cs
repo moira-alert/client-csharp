@@ -32,26 +32,19 @@ namespace Moira.ApiClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="DtoTeamModel" /> class.
         /// </summary>
-        /// <param name="description">description</param>
         /// <param name="id">id</param>
         /// <param name="name">name</param>
+        /// <param name="description">description</param>
         [JsonConstructor]
-        public DtoTeamModel(string description, string id, string name)
+        public DtoTeamModel(string id, string name, Option<string> description = default)
         {
-            Description = description;
             Id = id;
             Name = name;
+            DescriptionOption = description;
             OnCreated();
         }
 
         partial void OnCreated();
-
-        /// <summary>
-        /// Gets or Sets Description
-        /// </summary>
-        /* <example>Team that holds all members of infrastructure division</example> */
-        [JsonPropertyName("description")]
-        public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
@@ -68,6 +61,20 @@ namespace Moira.ApiClient.Model
         public string Name { get; set; }
 
         /// <summary>
+        /// Used to track the state of Description
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> DescriptionOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Description
+        /// </summary>
+        /* <example>Team that holds all members of infrastructure division</example> */
+        [JsonPropertyName("description")]
+        public string Description { get { return this.DescriptionOption; } set { this.DescriptionOption = new Option<string>(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -75,9 +82,9 @@ namespace Moira.ApiClient.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class DtoTeamModel {\n");
-            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -115,9 +122,9 @@ namespace Moira.ApiClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string> description = default;
             Option<string> id = default;
             Option<string> name = default;
+            Option<string> description = default;
 
             while (utf8JsonReader.Read())
             {
@@ -134,14 +141,14 @@ namespace Moira.ApiClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "description":
-                            description = new Option<string>(utf8JsonReader.GetString());
-                            break;
                         case "id":
                             id = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "name":
                             name = new Option<string>(utf8JsonReader.GetString());
+                            break;
+                        case "description":
+                            description = new Option<string>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -149,17 +156,11 @@ namespace Moira.ApiClient.Model
                 }
             }
 
-            if (!description.IsSet)
-                throw new ArgumentException("Property is required for class DtoTeamModel.", nameof(description));
-
             if (!id.IsSet)
                 throw new ArgumentException("Property is required for class DtoTeamModel.", nameof(id));
 
             if (!name.IsSet)
                 throw new ArgumentException("Property is required for class DtoTeamModel.", nameof(name));
-
-            if (description.IsSet && description.Value == null)
-                throw new ArgumentNullException(nameof(description), "Property is not nullable for class DtoTeamModel.");
 
             if (id.IsSet && id.Value == null)
                 throw new ArgumentNullException(nameof(id), "Property is not nullable for class DtoTeamModel.");
@@ -167,7 +168,10 @@ namespace Moira.ApiClient.Model
             if (name.IsSet && name.Value == null)
                 throw new ArgumentNullException(nameof(name), "Property is not nullable for class DtoTeamModel.");
 
-            return new DtoTeamModel(description.Value, id.Value, name.Value);
+            if (description.IsSet && description.Value == null)
+                throw new ArgumentNullException(nameof(description), "Property is not nullable for class DtoTeamModel.");
+
+            return new DtoTeamModel(id.Value, name.Value, description);
         }
 
         /// <summary>
@@ -194,20 +198,21 @@ namespace Moira.ApiClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, DtoTeamModel dtoTeamModel, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (dtoTeamModel.Description == null)
-                throw new ArgumentNullException(nameof(dtoTeamModel.Description), "Property is required for class DtoTeamModel.");
-
             if (dtoTeamModel.Id == null)
                 throw new ArgumentNullException(nameof(dtoTeamModel.Id), "Property is required for class DtoTeamModel.");
 
             if (dtoTeamModel.Name == null)
                 throw new ArgumentNullException(nameof(dtoTeamModel.Name), "Property is required for class DtoTeamModel.");
 
-            writer.WriteString("description", dtoTeamModel.Description);
+            if (dtoTeamModel.DescriptionOption.IsSet && dtoTeamModel.Description == null)
+                throw new ArgumentNullException(nameof(dtoTeamModel.Description), "Property is required for class DtoTeamModel.");
 
             writer.WriteString("id", dtoTeamModel.Id);
 
             writer.WriteString("name", dtoTeamModel.Name);
+
+            if (dtoTeamModel.DescriptionOption.IsSet)
+                writer.WriteString("description", dtoTeamModel.Description);
         }
     }
 }

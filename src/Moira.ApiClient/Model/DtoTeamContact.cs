@@ -32,21 +32,21 @@ namespace Moira.ApiClient.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="DtoTeamContact" /> class.
         /// </summary>
+        /// <param name="id">id</param>
         /// <param name="type">type</param>
         /// <param name="value">value</param>
         /// <param name="extraMessage">extraMessage</param>
-        /// <param name="id">id</param>
         /// <param name="name">name</param>
         /// <param name="team">This field is deprecated</param>
         /// <param name="teamId">teamId</param>
         /// <param name="user">user</param>
         [JsonConstructor]
-        public DtoTeamContact(string type, string value, Option<string> extraMessage = default, Option<string> id = default, Option<string> name = default, Option<string> team = default, Option<string> teamId = default, Option<string> user = default)
+        public DtoTeamContact(string id, string type, string value, Option<string> extraMessage = default, Option<string> name = default, Option<string> team = default, Option<string> teamId = default, Option<string> user = default)
         {
+            Id = id;
             Type = type;
             Value = value;
             ExtraMessageOption = extraMessage;
-            IdOption = id;
             NameOption = name;
             TeamOption = team;
             TeamIdOption = teamId;
@@ -55,6 +55,13 @@ namespace Moira.ApiClient.Model
         }
 
         partial void OnCreated();
+
+        /// <summary>
+        /// Gets or Sets Id
+        /// </summary>
+        /* <example>1dd38765-c5be-418d-81fa-7a5f879c2315</example> */
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
@@ -82,20 +89,6 @@ namespace Moira.ApiClient.Model
         /// </summary>
         [JsonPropertyName("extra_message")]
         public string ExtraMessage { get { return this.ExtraMessageOption; } set { this.ExtraMessageOption = new Option<string>(value); } }
-
-        /// <summary>
-        /// Used to track the state of Id
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string> IdOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets Id
-        /// </summary>
-        /* <example>1dd38765-c5be-418d-81fa-7a5f879c2315</example> */
-        [JsonPropertyName("id")]
-        public string Id { get { return this.IdOption; } set { this.IdOption = new Option<string>(value); } }
 
         /// <summary>
         /// Used to track the state of Name
@@ -159,10 +152,10 @@ namespace Moira.ApiClient.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class DtoTeamContact {\n");
+            sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Value: ").Append(Value).Append("\n");
             sb.Append("  ExtraMessage: ").Append(ExtraMessage).Append("\n");
-            sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Team: ").Append(Team).Append("\n");
             sb.Append("  TeamId: ").Append(TeamId).Append("\n");
@@ -204,10 +197,10 @@ namespace Moira.ApiClient.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
+            Option<string> id = default;
             Option<string> type = default;
             Option<string> value = default;
             Option<string> extraMessage = default;
-            Option<string> id = default;
             Option<string> name = default;
             Option<string> team = default;
             Option<string> teamId = default;
@@ -228,6 +221,9 @@ namespace Moira.ApiClient.Model
 
                     switch (localVarJsonPropertyName)
                     {
+                        case "id":
+                            id = new Option<string>(utf8JsonReader.GetString());
+                            break;
                         case "type":
                             type = new Option<string>(utf8JsonReader.GetString());
                             break;
@@ -236,9 +232,6 @@ namespace Moira.ApiClient.Model
                             break;
                         case "extra_message":
                             extraMessage = new Option<string>(utf8JsonReader.GetString());
-                            break;
-                        case "id":
-                            id = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "name":
                             name = new Option<string>(utf8JsonReader.GetString());
@@ -258,11 +251,17 @@ namespace Moira.ApiClient.Model
                 }
             }
 
+            if (!id.IsSet)
+                throw new ArgumentException("Property is required for class DtoTeamContact.", nameof(id));
+
             if (!type.IsSet)
                 throw new ArgumentException("Property is required for class DtoTeamContact.", nameof(type));
 
             if (!value.IsSet)
                 throw new ArgumentException("Property is required for class DtoTeamContact.", nameof(value));
+
+            if (id.IsSet && id.Value == null)
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class DtoTeamContact.");
 
             if (type.IsSet && type.Value == null)
                 throw new ArgumentNullException(nameof(type), "Property is not nullable for class DtoTeamContact.");
@@ -272,9 +271,6 @@ namespace Moira.ApiClient.Model
 
             if (extraMessage.IsSet && extraMessage.Value == null)
                 throw new ArgumentNullException(nameof(extraMessage), "Property is not nullable for class DtoTeamContact.");
-
-            if (id.IsSet && id.Value == null)
-                throw new ArgumentNullException(nameof(id), "Property is not nullable for class DtoTeamContact.");
 
             if (name.IsSet && name.Value == null)
                 throw new ArgumentNullException(nameof(name), "Property is not nullable for class DtoTeamContact.");
@@ -288,7 +284,7 @@ namespace Moira.ApiClient.Model
             if (user.IsSet && user.Value == null)
                 throw new ArgumentNullException(nameof(user), "Property is not nullable for class DtoTeamContact.");
 
-            return new DtoTeamContact(type.Value, value.Value, extraMessage, id, name, team, teamId, user);
+            return new DtoTeamContact(id.Value, type.Value, value.Value, extraMessage, name, team, teamId, user);
         }
 
         /// <summary>
@@ -315,6 +311,9 @@ namespace Moira.ApiClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, DtoTeamContact dtoTeamContact, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (dtoTeamContact.Id == null)
+                throw new ArgumentNullException(nameof(dtoTeamContact.Id), "Property is required for class DtoTeamContact.");
+
             if (dtoTeamContact.Type == null)
                 throw new ArgumentNullException(nameof(dtoTeamContact.Type), "Property is required for class DtoTeamContact.");
 
@@ -323,9 +322,6 @@ namespace Moira.ApiClient.Model
 
             if (dtoTeamContact.ExtraMessageOption.IsSet && dtoTeamContact.ExtraMessage == null)
                 throw new ArgumentNullException(nameof(dtoTeamContact.ExtraMessage), "Property is required for class DtoTeamContact.");
-
-            if (dtoTeamContact.IdOption.IsSet && dtoTeamContact.Id == null)
-                throw new ArgumentNullException(nameof(dtoTeamContact.Id), "Property is required for class DtoTeamContact.");
 
             if (dtoTeamContact.NameOption.IsSet && dtoTeamContact.Name == null)
                 throw new ArgumentNullException(nameof(dtoTeamContact.Name), "Property is required for class DtoTeamContact.");
@@ -339,15 +335,14 @@ namespace Moira.ApiClient.Model
             if (dtoTeamContact.UserOption.IsSet && dtoTeamContact.User == null)
                 throw new ArgumentNullException(nameof(dtoTeamContact.User), "Property is required for class DtoTeamContact.");
 
+            writer.WriteString("id", dtoTeamContact.Id);
+
             writer.WriteString("type", dtoTeamContact.Type);
 
             writer.WriteString("value", dtoTeamContact.Value);
 
             if (dtoTeamContact.ExtraMessageOption.IsSet)
                 writer.WriteString("extra_message", dtoTeamContact.ExtraMessage);
-
-            if (dtoTeamContact.IdOption.IsSet)
-                writer.WriteString("id", dtoTeamContact.Id);
 
             if (dtoTeamContact.NameOption.IsSet)
                 writer.WriteString("name", dtoTeamContact.Name);

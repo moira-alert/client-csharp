@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Id** | **string** |  | 
 **Type** | **string** |  | 
 **Value** | **string** |  | 
 **ExtraMessage** | **string** |  | [optional] 
-**Id** | **string** |  | [optional] 
 **Name** | **string** |  | [optional] 
 **Score** | [**DtoContactScore**](DtoContactScore.md) |  | [optional] 
 **TeamId** | **string** |  | [optional] 

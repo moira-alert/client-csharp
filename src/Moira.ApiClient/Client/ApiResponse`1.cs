@@ -212,6 +212,26 @@ namespace Moira.ApiClient.Client
     /// An interface for responses of type 
     /// </summary>
     /// <typeparam name="TType"></typeparam>
+    public interface ICustomHttpStatusCode418<TType> : IApiResponse
+    {
+        /// <summary>
+        /// Deserializes the response if the response is CustomHttpStatusCode418
+        /// </summary>
+        /// <returns></returns>
+        TType CustomHttpStatusCode418();
+
+        /// <summary>
+        /// Returns true if the response is CustomHttpStatusCode418 and the deserialized response is not null
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        bool TryCustomHttpStatusCode418(out TType result);
+    }
+
+    /// <summary>
+    /// An interface for responses of type 
+    /// </summary>
+    /// <typeparam name="TType"></typeparam>
     public interface IOk<TType> : IApiResponse
     {
         /// <summary>
