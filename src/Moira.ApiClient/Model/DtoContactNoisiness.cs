@@ -33,21 +33,21 @@ namespace Moira.ApiClient.Model
         /// Initializes a new instance of the <see cref="DtoContactNoisiness" /> class.
         /// </summary>
         /// <param name="eventsCount">EventsCount for the contact.</param>
+        /// <param name="id">id</param>
         /// <param name="type">type</param>
         /// <param name="value">value</param>
         /// <param name="extraMessage">extraMessage</param>
-        /// <param name="id">id</param>
         /// <param name="name">name</param>
         /// <param name="teamId">teamId</param>
         /// <param name="user">user</param>
         [JsonConstructor]
-        public DtoContactNoisiness(int eventsCount, string type, string value, Option<string> extraMessage = default, Option<string> id = default, Option<string> name = default, Option<string> teamId = default, Option<string> user = default)
+        public DtoContactNoisiness(int eventsCount, string id, string type, string value, Option<string> extraMessage = default, Option<string> name = default, Option<string> teamId = default, Option<string> user = default)
         {
             EventsCount = eventsCount;
+            Id = id;
             Type = type;
             Value = value;
             ExtraMessageOption = extraMessage;
-            IdOption = id;
             NameOption = name;
             TeamIdOption = teamId;
             UserOption = user;
@@ -62,6 +62,13 @@ namespace Moira.ApiClient.Model
         /// <value>EventsCount for the contact.</value>
         [JsonPropertyName("events_count")]
         public int EventsCount { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Id
+        /// </summary>
+        /* <example>1dd38765-c5be-418d-81fa-7a5f879c2315</example> */
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
@@ -89,20 +96,6 @@ namespace Moira.ApiClient.Model
         /// </summary>
         [JsonPropertyName("extra_message")]
         public string ExtraMessage { get { return this.ExtraMessageOption; } set { this.ExtraMessageOption = new Option<string>(value); } }
-
-        /// <summary>
-        /// Used to track the state of Id
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string> IdOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets Id
-        /// </summary>
-        /* <example>1dd38765-c5be-418d-81fa-7a5f879c2315</example> */
-        [JsonPropertyName("id")]
-        public string Id { get { return this.IdOption; } set { this.IdOption = new Option<string>(value); } }
 
         /// <summary>
         /// Used to track the state of Name
@@ -153,10 +146,10 @@ namespace Moira.ApiClient.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class DtoContactNoisiness {\n");
             sb.Append("  EventsCount: ").Append(EventsCount).Append("\n");
+            sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Value: ").Append(Value).Append("\n");
             sb.Append("  ExtraMessage: ").Append(ExtraMessage).Append("\n");
-            sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  TeamId: ").Append(TeamId).Append("\n");
             sb.Append("  User: ").Append(User).Append("\n");
@@ -198,10 +191,10 @@ namespace Moira.ApiClient.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<int?> eventsCount = default;
+            Option<string> id = default;
             Option<string> type = default;
             Option<string> value = default;
             Option<string> extraMessage = default;
-            Option<string> id = default;
             Option<string> name = default;
             Option<string> teamId = default;
             Option<string> user = default;
@@ -224,6 +217,9 @@ namespace Moira.ApiClient.Model
                         case "events_count":
                             eventsCount = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
+                        case "id":
+                            id = new Option<string>(utf8JsonReader.GetString());
+                            break;
                         case "type":
                             type = new Option<string>(utf8JsonReader.GetString());
                             break;
@@ -232,9 +228,6 @@ namespace Moira.ApiClient.Model
                             break;
                         case "extra_message":
                             extraMessage = new Option<string>(utf8JsonReader.GetString());
-                            break;
-                        case "id":
-                            id = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "name":
                             name = new Option<string>(utf8JsonReader.GetString());
@@ -254,6 +247,9 @@ namespace Moira.ApiClient.Model
             if (!eventsCount.IsSet)
                 throw new ArgumentException("Property is required for class DtoContactNoisiness.", nameof(eventsCount));
 
+            if (!id.IsSet)
+                throw new ArgumentException("Property is required for class DtoContactNoisiness.", nameof(id));
+
             if (!type.IsSet)
                 throw new ArgumentException("Property is required for class DtoContactNoisiness.", nameof(type));
 
@@ -262,6 +258,9 @@ namespace Moira.ApiClient.Model
 
             if (eventsCount.IsSet && eventsCount.Value == null)
                 throw new ArgumentNullException(nameof(eventsCount), "Property is not nullable for class DtoContactNoisiness.");
+
+            if (id.IsSet && id.Value == null)
+                throw new ArgumentNullException(nameof(id), "Property is not nullable for class DtoContactNoisiness.");
 
             if (type.IsSet && type.Value == null)
                 throw new ArgumentNullException(nameof(type), "Property is not nullable for class DtoContactNoisiness.");
@@ -272,9 +271,6 @@ namespace Moira.ApiClient.Model
             if (extraMessage.IsSet && extraMessage.Value == null)
                 throw new ArgumentNullException(nameof(extraMessage), "Property is not nullable for class DtoContactNoisiness.");
 
-            if (id.IsSet && id.Value == null)
-                throw new ArgumentNullException(nameof(id), "Property is not nullable for class DtoContactNoisiness.");
-
             if (name.IsSet && name.Value == null)
                 throw new ArgumentNullException(nameof(name), "Property is not nullable for class DtoContactNoisiness.");
 
@@ -284,7 +280,7 @@ namespace Moira.ApiClient.Model
             if (user.IsSet && user.Value == null)
                 throw new ArgumentNullException(nameof(user), "Property is not nullable for class DtoContactNoisiness.");
 
-            return new DtoContactNoisiness(eventsCount.Value.Value, type.Value, value.Value, extraMessage, id, name, teamId, user);
+            return new DtoContactNoisiness(eventsCount.Value.Value, id.Value, type.Value, value.Value, extraMessage, name, teamId, user);
         }
 
         /// <summary>
@@ -311,6 +307,9 @@ namespace Moira.ApiClient.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, DtoContactNoisiness dtoContactNoisiness, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (dtoContactNoisiness.Id == null)
+                throw new ArgumentNullException(nameof(dtoContactNoisiness.Id), "Property is required for class DtoContactNoisiness.");
+
             if (dtoContactNoisiness.Type == null)
                 throw new ArgumentNullException(nameof(dtoContactNoisiness.Type), "Property is required for class DtoContactNoisiness.");
 
@@ -319,9 +318,6 @@ namespace Moira.ApiClient.Model
 
             if (dtoContactNoisiness.ExtraMessageOption.IsSet && dtoContactNoisiness.ExtraMessage == null)
                 throw new ArgumentNullException(nameof(dtoContactNoisiness.ExtraMessage), "Property is required for class DtoContactNoisiness.");
-
-            if (dtoContactNoisiness.IdOption.IsSet && dtoContactNoisiness.Id == null)
-                throw new ArgumentNullException(nameof(dtoContactNoisiness.Id), "Property is required for class DtoContactNoisiness.");
 
             if (dtoContactNoisiness.NameOption.IsSet && dtoContactNoisiness.Name == null)
                 throw new ArgumentNullException(nameof(dtoContactNoisiness.Name), "Property is required for class DtoContactNoisiness.");
@@ -334,15 +330,14 @@ namespace Moira.ApiClient.Model
 
             writer.WriteNumber("events_count", dtoContactNoisiness.EventsCount);
 
+            writer.WriteString("id", dtoContactNoisiness.Id);
+
             writer.WriteString("type", dtoContactNoisiness.Type);
 
             writer.WriteString("value", dtoContactNoisiness.Value);
 
             if (dtoContactNoisiness.ExtraMessageOption.IsSet)
                 writer.WriteString("extra_message", dtoContactNoisiness.ExtraMessage);
-
-            if (dtoContactNoisiness.IdOption.IsSet)
-                writer.WriteString("id", dtoContactNoisiness.Id);
 
             if (dtoContactNoisiness.NameOption.IsSet)
                 writer.WriteString("name", dtoContactNoisiness.Name);

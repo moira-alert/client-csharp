@@ -56,7 +56,8 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Trigger created successfully |  -  |
-| **400** | Bad request from client. Could be api.ErrorInvalidRequestExample or dto.SaveTriggerResponse |  -  |
+| **400** | Bad request from client |  -  |
+| **418** | Target Validation failed |  -  |
 | **422** | Render error |  -  |
 | **500** | Internal server error |  -  |
 | **503** | Remote server unavailable |  -  |
@@ -739,6 +740,7 @@ No authorization required
 | **200** | Updated trigger |  -  |
 | **400** | Bad request from client |  -  |
 | **404** | Resource not found |  -  |
+| **418** | Target Validation failed |  -  |
 | **422** | Render error |  -  |
 | **500** | Internal server error |  -  |
 | **503** | Remote server unavailable |  -  |

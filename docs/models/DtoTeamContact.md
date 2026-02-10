@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Id** | **string** |  | 
 **Type** | **string** |  | 
 **Value** | **string** |  | 
 **ExtraMessage** | **string** |  | [optional] 
-**Id** | **string** |  | [optional] 
 **Name** | **string** |  | [optional] 
 **Team** | **string** | This field is deprecated | [optional] 
 **TeamId** | **string** |  | [optional] 

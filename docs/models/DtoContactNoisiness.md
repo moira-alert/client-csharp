@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EventsCount** | **int** | EventsCount for the contact. | 
+**Id** | **string** |  | 
 **Type** | **string** |  | 
 **Value** | **string** |  | 
 **ExtraMessage** | **string** |  | [optional] 
-**Id** | **string** |  | [optional] 
 **Name** | **string** |  | [optional] 
 **TeamId** | **string** |  | [optional] 
 **User** | **string** |  | [optional] 
