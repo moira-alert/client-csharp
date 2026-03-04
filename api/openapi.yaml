@@ -13,7 +13,7 @@ externalDocs:
     \ our [guide](https://moira.readthedocs.io) on getting started with Moira"
   url: https://moira.readthedocs.io/en/latest/overview.html
 servers:
-- url: /
+- url: /api
 tags:
 - description: "APIs for working with Moira contacts. For more details, see <https://moira.readthedocs.io/en/latest/installation/webhooks_scripts.html#contact/>"
   name: contact
@@ -2941,6 +2941,14 @@ paths:
           default: moira.team
           type: string
         style: form
+      - description: Search for triggers with this team ID
+        explode: true
+        in: query
+        name: teamID
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -3823,6 +3831,7 @@ components:
           mute_new_metrics: false
           created_at: created_at
           trigger_source: graphite_local
+          team_id: d844f26b-4646-4fca-b43c-a871cc21169a
           ttl_state: NODATA
           created_by: created_by
           targets:
@@ -3858,6 +3867,7 @@ components:
           mute_new_metrics: false
           created_at: created_at
           trigger_source: graphite_local
+          team_id: d844f26b-4646-4fca-b43c-a871cc21169a
           ttl_state: NODATA
           created_by: created_by
           targets:
@@ -3924,6 +3934,7 @@ components:
             mute_new_metrics: false
             created_at: created_at
             trigger_source: graphite_local
+            team_id: d844f26b-4646-4fca-b43c-a871cc21169a
             ttl_state: NODATA
             created_by: created_by
             targets:
@@ -3959,6 +3970,7 @@ components:
             mute_new_metrics: false
             created_at: created_at
             trigger_source: graphite_local
+            team_id: d844f26b-4646-4fca-b43c-a871cc21169a
             ttl_state: NODATA
             created_by: created_by
             targets:
@@ -4000,6 +4012,7 @@ components:
             mute_new_metrics: false
             created_at: created_at
             trigger_source: graphite_local
+            team_id: d844f26b-4646-4fca-b43c-a871cc21169a
             ttl_state: NODATA
             created_by: created_by
             targets:
@@ -4035,6 +4048,7 @@ components:
             mute_new_metrics: false
             created_at: created_at
             trigger_source: graphite_local
+            team_id: d844f26b-4646-4fca-b43c-a871cc21169a
             ttl_state: NODATA
             created_by: created_by
             targets:
@@ -4816,6 +4830,7 @@ components:
         mute_new_metrics: false
         created_at: created_at
         trigger_source: graphite_local
+        team_id: d844f26b-4646-4fca-b43c-a871cc21169a
         ttl_state: NODATA
         created_by: created_by
         targets:
@@ -4920,6 +4935,11 @@ components:
             type: string
           type: array
           uniqueItems: false
+        team_id:
+          description: ID of a Team that owns this trigger
+          example: d844f26b-4646-4fca-b43c-a871cc21169a
+          type: string
+          x-nullable: true
         throttling:
           example: 0
           format: int64
@@ -5177,6 +5197,7 @@ components:
           mute_new_metrics: false
           created_at: 5
           trigger_source: graphite_local
+          team_id: d844f26b-4646-4fca-b43c-a871cc21169a
           ttl_state: NODATA
           created_by: created_by
           targets:
@@ -5249,6 +5270,7 @@ components:
         mute_new_metrics: false
         created_at: created_at
         trigger_source: graphite_local
+        team_id: d844f26b-4646-4fca-b43c-a871cc21169a
         ttl_state: NODATA
         created_by: created_by
         targets:
@@ -5352,6 +5374,11 @@ components:
             type: string
           type: array
           uniqueItems: false
+        team_id:
+          description: ID of a Team that owns this trigger
+          example: d844f26b-4646-4fca-b43c-a871cc21169a
+          type: string
+          x-nullable: true
         trigger_source:
           description: Shows the type of source from where the metrics are fetched
           example: graphite_local
@@ -5405,27 +5432,30 @@ components:
       - warn_value
     dto.TriggerNoisiness:
       example:
-        error_value: 1000
-        expression: ""
-        patterns:
-        - ""
         trigger_type: rising
         alone_metrics:
           t1: true
         is_remote: false
-        mute_new_metrics: false
         created_at: created_at
         trigger_source: graphite_local
-        ttl_state: NODATA
-        created_by: created_by
+        team_id: d844f26b-4646-4fca-b43c-a871cc21169a
         targets:
         - devOps.my_server.hdd.freespace_mbytes
+        cluster_id: default
+        throttling: 0
+        updated_at: updated_at
+        id: 292516ed-4924-4154-a62c-ebe312431fce
+        error_value: 1000
+        expression: ""
+        patterns:
+        - ""
+        mute_new_metrics: false
+        ttl_state: NODATA
+        created_by: created_by
         ttl: 600
         tags:
         - server
         - disk
-        cluster_id: default
-        throttling: 0
         events_count: 0
         sched:
           endOffset: 1439
@@ -5436,11 +5466,9 @@ components:
             enabled: true
           - name: Mon
             enabled: true
-        updated_at: updated_at
         warn_value: 500
         name: Not enough disk space left
         updated_by: updated_by
-        id: 292516ed-4924-4154-a62c-ebe312431fce
         desc: check the size of /var/log
       properties:
         alone_metrics:
@@ -5524,6 +5552,11 @@ components:
             type: string
           type: array
           uniqueItems: false
+        team_id:
+          description: ID of a Team that owns this trigger
+          example: d844f26b-4646-4fca-b43c-a871cc21169a
+          type: string
+          x-nullable: true
         throttling:
           example: 0
           format: int64
@@ -5587,27 +5620,30 @@ components:
         size: 100
         page: 0
         list:
-        - error_value: 1000
-          expression: ""
-          patterns:
-          - ""
-          trigger_type: rising
+        - trigger_type: rising
           alone_metrics:
             t1: true
           is_remote: false
-          mute_new_metrics: false
           created_at: created_at
           trigger_source: graphite_local
-          ttl_state: NODATA
-          created_by: created_by
+          team_id: d844f26b-4646-4fca-b43c-a871cc21169a
           targets:
           - devOps.my_server.hdd.freespace_mbytes
+          cluster_id: default
+          throttling: 0
+          updated_at: updated_at
+          id: 292516ed-4924-4154-a62c-ebe312431fce
+          error_value: 1000
+          expression: ""
+          patterns:
+          - ""
+          mute_new_metrics: false
+          ttl_state: NODATA
+          created_by: created_by
           ttl: 600
           tags:
           - server
           - disk
-          cluster_id: default
-          throttling: 0
           events_count: 0
           sched:
             endOffset: 1439
@@ -5618,33 +5654,34 @@ components:
               enabled: true
             - name: Mon
               enabled: true
-          updated_at: updated_at
           warn_value: 500
           name: Not enough disk space left
           updated_by: updated_by
-          id: 292516ed-4924-4154-a62c-ebe312431fce
           desc: check the size of /var/log
-        - error_value: 1000
-          expression: ""
-          patterns:
-          - ""
-          trigger_type: rising
+        - trigger_type: rising
           alone_metrics:
             t1: true
           is_remote: false
-          mute_new_metrics: false
           created_at: created_at
           trigger_source: graphite_local
-          ttl_state: NODATA
-          created_by: created_by
+          team_id: d844f26b-4646-4fca-b43c-a871cc21169a
           targets:
           - devOps.my_server.hdd.freespace_mbytes
+          cluster_id: default
+          throttling: 0
+          updated_at: updated_at
+          id: 292516ed-4924-4154-a62c-ebe312431fce
+          error_value: 1000
+          expression: ""
+          patterns:
+          - ""
+          mute_new_metrics: false
+          ttl_state: NODATA
+          created_by: created_by
           ttl: 600
           tags:
           - server
           - disk
-          cluster_id: default
-          throttling: 0
           events_count: 0
           sched:
             endOffset: 1439
@@ -5655,11 +5692,9 @@ components:
               enabled: true
             - name: Mon
               enabled: true
-          updated_at: updated_at
           warn_value: 500
           name: Not enough disk space left
           updated_by: updated_by
-          id: 292516ed-4924-4154-a62c-ebe312431fce
           desc: check the size of /var/log
       properties:
         list:
@@ -5700,6 +5735,7 @@ components:
             t1: true
           created_at: 0
           trigger_source: graphite_local
+          team_id: d844f26b-4646-4fca-b43c-a871cc21169a
           targets:
           - devOps.my_server.hdd.freespace_mbytes
           cluster_id: default
@@ -5773,6 +5809,7 @@ components:
             t1: true
           created_at: 0
           trigger_source: graphite_local
+          team_id: d844f26b-4646-4fca-b43c-a871cc21169a
           targets:
           - devOps.my_server.hdd.freespace_mbytes
           cluster_id: default
@@ -6574,6 +6611,7 @@ components:
         mute_new_metrics: false
         created_at: 5
         trigger_source: graphite_local
+        team_id: d844f26b-4646-4fca-b43c-a871cc21169a
         ttl_state: NODATA
         created_by: created_by
         targets:
@@ -6662,6 +6700,10 @@ components:
             type: string
           type: array
           uniqueItems: false
+        team_id:
+          example: d844f26b-4646-4fca-b43c-a871cc21169a
+          type: string
+          x-nullable: true
         trigger_source:
           example: graphite_local
           type: string
@@ -6708,6 +6750,7 @@ components:
           t1: true
         created_at: 0
         trigger_source: graphite_local
+        team_id: d844f26b-4646-4fca-b43c-a871cc21169a
         targets:
         - devOps.my_server.hdd.freespace_mbytes
         cluster_id: default
@@ -6844,6 +6887,10 @@ components:
             type: string
           type: array
           uniqueItems: false
+        team_id:
+          example: d844f26b-4646-4fca-b43c-a871cc21169a
+          type: string
+          x-nullable: true
         throttling:
           example: 0
           format: int64

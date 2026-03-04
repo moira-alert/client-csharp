@@ -1,6 +1,6 @@
 # Moira.ApiClient.Api.TriggerApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to */api*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
@@ -585,7 +585,7 @@ No authorization required
 
 <a id="searchtriggers"></a>
 # **SearchTriggers**
-> DtoTriggersList SearchTriggers (bool onlyProblems = null, string text = null, int p = null, int size = null, List<string> tags = null, bool createPager = null, string pagerID = null, string createdBy = null)
+> DtoTriggersList SearchTriggers (bool onlyProblems = null, string text = null, int p = null, int size = null, List<string> tags = null, bool createPager = null, string pagerID = null, string createdBy = null, string teamID = null)
 
 Search triggers. Replaces the deprecated `page` path
 
@@ -604,6 +604,7 @@ You can also add filtering by tags, for this purpose add query parameters tags[0
 | **createPager** | **bool** | Create pager | [optional] [default to false] |
 | **pagerID** | **string** | Pager ID | [optional] [default to &quot;bcba82f5-48cf-44c0-b7d6-e1d32c64a88c&quot;] |
 | **createdBy** | **string** | Created By | [optional] [default to &quot;moira.team&quot;] |
+| **teamID** | **string** | Search for triggers with this team ID | [optional]  |
 
 ### Return type
 

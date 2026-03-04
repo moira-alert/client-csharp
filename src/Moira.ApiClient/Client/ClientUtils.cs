@@ -281,7 +281,7 @@ namespace Moira.ApiClient.Client
         /// <summary>
         /// The base path of the API
         /// </summary>
-        public const string BASE_ADDRESS = "http://localhost";
+        public const string BASE_ADDRESS = "/api";
 
         /// <summary>
         /// The scheme of the API
@@ -291,7 +291,7 @@ namespace Moira.ApiClient.Client
         /// <summary>
         /// The context path of the API
         /// </summary>
-        public const string CONTEXT_PATH = "";
+        public const string CONTEXT_PATH = "/api";
 
         /// <summary>
         /// The host of the API

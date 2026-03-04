@@ -419,9 +419,10 @@ namespace Moira.ApiClient.Api
         /// <param name="createPager">Create pager (optional, default to false)</param>
         /// <param name="pagerID">Pager ID (optional, default to &quot;bcba82f5-48cf-44c0-b7d6-e1d32c64a88c&quot;)</param>
         /// <param name="createdBy">Created By (optional, default to &quot;moira.team&quot;)</param>
+        /// <param name="teamID">Search for triggers with this team ID (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchTriggersApiResponse"/>&gt;</returns>
-        Task<ISearchTriggersApiResponse> SearchTriggersAsync(Option<bool> onlyProblems = default, Option<string> text = default, Option<int> p = default, Option<int> size = default, Option<List<string>> tags = default, Option<bool> createPager = default, Option<string> pagerID = default, Option<string> createdBy = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISearchTriggersApiResponse> SearchTriggersAsync(Option<bool> onlyProblems = default, Option<string> text = default, Option<int> p = default, Option<int> size = default, Option<List<string>> tags = default, Option<bool> createPager = default, Option<string> pagerID = default, Option<string> createdBy = default, Option<string> teamID = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Search triggers. Replaces the deprecated &#x60;page&#x60; path
@@ -437,9 +438,10 @@ namespace Moira.ApiClient.Api
         /// <param name="createPager">Create pager (optional, default to false)</param>
         /// <param name="pagerID">Pager ID (optional, default to &quot;bcba82f5-48cf-44c0-b7d6-e1d32c64a88c&quot;)</param>
         /// <param name="createdBy">Created By (optional, default to &quot;moira.team&quot;)</param>
+        /// <param name="teamID">Search for triggers with this team ID (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchTriggersApiResponse"/>&gt;</returns>
-        Task<ISearchTriggersApiResponse> SearchTriggersOrDefaultAsync(Option<bool> onlyProblems = default, Option<string> text = default, Option<int> p = default, Option<int> size = default, Option<List<string>> tags = default, Option<bool> createPager = default, Option<string> pagerID = default, Option<string> createdBy = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISearchTriggersApiResponse> SearchTriggersOrDefaultAsync(Option<bool> onlyProblems = default, Option<string> text = default, Option<int> p = default, Option<int> size = default, Option<List<string>> tags = default, Option<bool> createPager = default, Option<string> pagerID = default, Option<string> createdBy = default, Option<string> teamID = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Set metrics and the trigger itself to maintenance mode
@@ -6508,7 +6510,7 @@ namespace Moira.ApiClient.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSearchTriggers(ref Option<bool> onlyProblems, ref Option<string> text, ref Option<int> p, ref Option<int> size, Option<List<string>> tags, ref Option<bool> createPager, ref Option<string> pagerID, ref Option<string> createdBy);
+        partial void FormatSearchTriggers(ref Option<bool> onlyProblems, ref Option<string> text, ref Option<int> p, ref Option<int> size, Option<List<string>> tags, ref Option<bool> createPager, ref Option<string> pagerID, ref Option<string> createdBy, ref Option<string> teamID);
 
         /// <summary>
         /// Validates the request parameters
@@ -6517,8 +6519,9 @@ namespace Moira.ApiClient.Api
         /// <param name="tags"></param>
         /// <param name="pagerID"></param>
         /// <param name="createdBy"></param>
+        /// <param name="teamID"></param>
         /// <returns></returns>
-        private void ValidateSearchTriggers(Option<string> text, Option<List<string>> tags, Option<string> pagerID, Option<string> createdBy)
+        private void ValidateSearchTriggers(Option<string> text, Option<List<string>> tags, Option<string> pagerID, Option<string> createdBy, Option<string> teamID)
         {
             if (text.IsSet && text.Value == null)
                 throw new ArgumentNullException(nameof(text));
@@ -6531,6 +6534,9 @@ namespace Moira.ApiClient.Api
 
             if (createdBy.IsSet && createdBy.Value == null)
                 throw new ArgumentNullException(nameof(createdBy));
+
+            if (teamID.IsSet && teamID.Value == null)
+                throw new ArgumentNullException(nameof(teamID));
         }
 
         /// <summary>
@@ -6545,10 +6551,11 @@ namespace Moira.ApiClient.Api
         /// <param name="createPager"></param>
         /// <param name="pagerID"></param>
         /// <param name="createdBy"></param>
-        private void AfterSearchTriggersDefaultImplementation(ISearchTriggersApiResponse apiResponseLocalVar, Option<bool> onlyProblems, Option<string> text, Option<int> p, Option<int> size, Option<List<string>> tags, Option<bool> createPager, Option<string> pagerID, Option<string> createdBy)
+        /// <param name="teamID"></param>
+        private void AfterSearchTriggersDefaultImplementation(ISearchTriggersApiResponse apiResponseLocalVar, Option<bool> onlyProblems, Option<string> text, Option<int> p, Option<int> size, Option<List<string>> tags, Option<bool> createPager, Option<string> pagerID, Option<string> createdBy, Option<string> teamID)
         {
             bool suppressDefaultLog = false;
-            AfterSearchTriggers(ref suppressDefaultLog, apiResponseLocalVar, onlyProblems, text, p, size, tags, createPager, pagerID, createdBy);
+            AfterSearchTriggers(ref suppressDefaultLog, apiResponseLocalVar, onlyProblems, text, p, size, tags, createPager, pagerID, createdBy, teamID);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -6566,7 +6573,8 @@ namespace Moira.ApiClient.Api
         /// <param name="createPager"></param>
         /// <param name="pagerID"></param>
         /// <param name="createdBy"></param>
-        partial void AfterSearchTriggers(ref bool suppressDefaultLog, ISearchTriggersApiResponse apiResponseLocalVar, Option<bool> onlyProblems, Option<string> text, Option<int> p, Option<int> size, Option<List<string>> tags, Option<bool> createPager, Option<string> pagerID, Option<string> createdBy);
+        /// <param name="teamID"></param>
+        partial void AfterSearchTriggers(ref bool suppressDefaultLog, ISearchTriggersApiResponse apiResponseLocalVar, Option<bool> onlyProblems, Option<string> text, Option<int> p, Option<int> size, Option<List<string>> tags, Option<bool> createPager, Option<string> pagerID, Option<string> createdBy, Option<string> teamID);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -6582,10 +6590,11 @@ namespace Moira.ApiClient.Api
         /// <param name="createPager"></param>
         /// <param name="pagerID"></param>
         /// <param name="createdBy"></param>
-        private void OnErrorSearchTriggersDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<bool> onlyProblems, Option<string> text, Option<int> p, Option<int> size, Option<List<string>> tags, Option<bool> createPager, Option<string> pagerID, Option<string> createdBy)
+        /// <param name="teamID"></param>
+        private void OnErrorSearchTriggersDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<bool> onlyProblems, Option<string> text, Option<int> p, Option<int> size, Option<List<string>> tags, Option<bool> createPager, Option<string> pagerID, Option<string> createdBy, Option<string> teamID)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorSearchTriggers(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, onlyProblems, text, p, size, tags, createPager, pagerID, createdBy);
+            OnErrorSearchTriggers(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, onlyProblems, text, p, size, tags, createPager, pagerID, createdBy, teamID);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -6605,7 +6614,8 @@ namespace Moira.ApiClient.Api
         /// <param name="createPager"></param>
         /// <param name="pagerID"></param>
         /// <param name="createdBy"></param>
-        partial void OnErrorSearchTriggers(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<bool> onlyProblems, Option<string> text, Option<int> p, Option<int> size, Option<List<string>> tags, Option<bool> createPager, Option<string> pagerID, Option<string> createdBy);
+        /// <param name="teamID"></param>
+        partial void OnErrorSearchTriggers(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<bool> onlyProblems, Option<string> text, Option<int> p, Option<int> size, Option<List<string>> tags, Option<bool> createPager, Option<string> pagerID, Option<string> createdBy, Option<string> teamID);
 
         /// <summary>
         /// Search triggers. Replaces the deprecated &#x60;page&#x60; path You can also add filtering by tags, for this purpose add query parameters tags[0]&#x3D;test, tags[1]&#x3D;test1 and so on For example, &#x60;/api/trigger/search?tags[0]&#x3D;test&amp;tags[1]&#x3D;test1&#x60;
@@ -6618,13 +6628,14 @@ namespace Moira.ApiClient.Api
         /// <param name="createPager">Create pager (optional, default to false)</param>
         /// <param name="pagerID">Pager ID (optional, default to &quot;bcba82f5-48cf-44c0-b7d6-e1d32c64a88c&quot;)</param>
         /// <param name="createdBy">Created By (optional, default to &quot;moira.team&quot;)</param>
+        /// <param name="teamID">Search for triggers with this team ID (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchTriggersApiResponse"/>&gt;</returns>
-        public async Task<ISearchTriggersApiResponse> SearchTriggersOrDefaultAsync(Option<bool> onlyProblems = default, Option<string> text = default, Option<int> p = default, Option<int> size = default, Option<List<string>> tags = default, Option<bool> createPager = default, Option<string> pagerID = default, Option<string> createdBy = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISearchTriggersApiResponse> SearchTriggersOrDefaultAsync(Option<bool> onlyProblems = default, Option<string> text = default, Option<int> p = default, Option<int> size = default, Option<List<string>> tags = default, Option<bool> createPager = default, Option<string> pagerID = default, Option<string> createdBy = default, Option<string> teamID = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await SearchTriggersAsync(onlyProblems, text, p, size, tags, createPager, pagerID, createdBy, cancellationToken).ConfigureAwait(false);
+                return await SearchTriggersAsync(onlyProblems, text, p, size, tags, createPager, pagerID, createdBy, teamID, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -6644,17 +6655,18 @@ namespace Moira.ApiClient.Api
         /// <param name="createPager">Create pager (optional, default to false)</param>
         /// <param name="pagerID">Pager ID (optional, default to &quot;bcba82f5-48cf-44c0-b7d6-e1d32c64a88c&quot;)</param>
         /// <param name="createdBy">Created By (optional, default to &quot;moira.team&quot;)</param>
+        /// <param name="teamID">Search for triggers with this team ID (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchTriggersApiResponse"/>&gt;</returns>
-        public async Task<ISearchTriggersApiResponse> SearchTriggersAsync(Option<bool> onlyProblems = default, Option<string> text = default, Option<int> p = default, Option<int> size = default, Option<List<string>> tags = default, Option<bool> createPager = default, Option<string> pagerID = default, Option<string> createdBy = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISearchTriggersApiResponse> SearchTriggersAsync(Option<bool> onlyProblems = default, Option<string> text = default, Option<int> p = default, Option<int> size = default, Option<List<string>> tags = default, Option<bool> createPager = default, Option<string> pagerID = default, Option<string> createdBy = default, Option<string> teamID = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateSearchTriggers(text, tags, pagerID, createdBy);
+                ValidateSearchTriggers(text, tags, pagerID, createdBy, teamID);
 
-                FormatSearchTriggers(ref onlyProblems, ref text, ref p, ref size, tags, ref createPager, ref pagerID, ref createdBy);
+                FormatSearchTriggers(ref onlyProblems, ref text, ref p, ref size, tags, ref createPager, ref pagerID, ref createdBy, ref teamID);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -6691,6 +6703,9 @@ namespace Moira.ApiClient.Api
                     if (createdBy.IsSet)
                         parseQueryStringLocalVar["createdBy"] = ClientUtils.ParameterToString(createdBy.Value);
 
+                    if (teamID.IsSet)
+                        parseQueryStringLocalVar["teamID"] = ClientUtils.ParameterToString(teamID.Value);
+
                     uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
 
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
@@ -6715,7 +6730,7 @@ namespace Moira.ApiClient.Api
 
                         SearchTriggersApiResponse apiResponseLocalVar = new SearchTriggersApiResponse(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/trigger/search", requestedAtLocalVar, _jsonSerializerOptions);
 
-                        AfterSearchTriggersDefaultImplementation(apiResponseLocalVar, onlyProblems, text, p, size, tags, createPager, pagerID, createdBy);
+                        AfterSearchTriggersDefaultImplementation(apiResponseLocalVar, onlyProblems, text, p, size, tags, createPager, pagerID, createdBy, teamID);
 
                         Events.ExecuteOnSearchTriggers(apiResponseLocalVar);
 
@@ -6725,7 +6740,7 @@ namespace Moira.ApiClient.Api
             }
             catch(Exception e)
             {
-                OnErrorSearchTriggersDefaultImplementation(e, "/trigger/search", uriBuilderLocalVar.Path, onlyProblems, text, p, size, tags, createPager, pagerID, createdBy);
+                OnErrorSearchTriggersDefaultImplementation(e, "/trigger/search", uriBuilderLocalVar.Path, onlyProblems, text, p, size, tags, createPager, pagerID, createdBy, teamID);
                 Events.ExecuteOnErrorSearchTriggers(e);
                 throw;
             }

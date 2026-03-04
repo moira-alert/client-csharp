@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **Desc** | **string** | Description string | [optional] 
 **ErrorValue** | **decimal** | ERROR threshold | 
 **Sched** | [**MoiraScheduleData**](MoiraScheduleData.md) |  | [optional] 
+**TeamId** | **string** | ID of a Team that owns this trigger | [optional] 
 **Ttl** | **long** | When there are no metrics for trigger, Moira will switch metric to TTLState state after TTL seconds | [optional] 
 **TtlState** | **string** | When there are no metrics for trigger, Moira will switch metric to TTLState state after TTL seconds | [optional] 
 **UpdatedAt** | **string** | Datetime  when the trigger was updated | 
