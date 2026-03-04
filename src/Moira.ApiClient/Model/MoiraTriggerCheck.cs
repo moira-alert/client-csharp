@@ -52,13 +52,14 @@ namespace Moira.ApiClient.Model
         /// <param name="expression">expression</param>
         /// <param name="pythonExpression">pythonExpression</param>
         /// <param name="sched">sched</param>
+        /// <param name="teamId">teamId</param>
         /// <param name="triggerSource">triggerSource</param>
         /// <param name="ttl">ttl</param>
         /// <param name="ttlState">ttlState</param>
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="warnValue">warnValue</param>
         [JsonConstructor]
-        public MoiraTriggerCheck(Dictionary<string, bool> aloneMetrics, string createdBy, Dictionary<string, string> highlights, string id, MoiraCheckData lastCheck, bool muteNewMetrics, string name, List<string> patterns, List<string> tags, List<string> targets, long throttling, string triggerType, string updatedBy, Option<string> clusterId = default, long? createdAt = default, Option<string> desc = default, decimal? errorValue = default, Option<string> expression = default, Option<string> pythonExpression = default, Option<MoiraScheduleData> sched = default, Option<string> triggerSource = default, Option<long?> ttl = default, Option<string> ttlState = default, long? updatedAt = default, decimal? warnValue = default)
+        public MoiraTriggerCheck(Dictionary<string, bool> aloneMetrics, string createdBy, Dictionary<string, string> highlights, string id, MoiraCheckData lastCheck, bool muteNewMetrics, string name, List<string> patterns, List<string> tags, List<string> targets, long throttling, string triggerType, string updatedBy, Option<string> clusterId = default, long? createdAt = default, Option<string> desc = default, decimal? errorValue = default, Option<string> expression = default, Option<string> pythonExpression = default, Option<MoiraScheduleData> sched = default, Option<string> teamId = default, Option<string> triggerSource = default, Option<long?> ttl = default, Option<string> ttlState = default, long? updatedAt = default, decimal? warnValue = default)
         {
             AloneMetrics = aloneMetrics;
             CreatedBy = createdBy;
@@ -80,6 +81,7 @@ namespace Moira.ApiClient.Model
             ExpressionOption = expression;
             PythonExpressionOption = pythonExpression;
             SchedOption = sched;
+            TeamIdOption = teamId;
             TriggerSourceOption = triggerSource;
             TtlOption = ttl;
             TtlStateOption = ttlState;
@@ -258,6 +260,20 @@ namespace Moira.ApiClient.Model
         public MoiraScheduleData Sched { get { return this.SchedOption; } set { this.SchedOption = new Option<MoiraScheduleData>(value); } }
 
         /// <summary>
+        /// Used to track the state of TeamId
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> TeamIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets TeamId
+        /// </summary>
+        /* <example>d844f26b-4646-4fca-b43c-a871cc21169a</example> */
+        [JsonPropertyName("team_id")]
+        public string TeamId { get { return this.TeamIdOption; } set { this.TeamIdOption = new Option<string>(value); } }
+
+        /// <summary>
         /// Used to track the state of TriggerSource
         /// </summary>
         [JsonIgnore]
@@ -340,6 +356,7 @@ namespace Moira.ApiClient.Model
             sb.Append("  Expression: ").Append(Expression).Append("\n");
             sb.Append("  PythonExpression: ").Append(PythonExpression).Append("\n");
             sb.Append("  Sched: ").Append(Sched).Append("\n");
+            sb.Append("  TeamId: ").Append(TeamId).Append("\n");
             sb.Append("  TriggerSource: ").Append(TriggerSource).Append("\n");
             sb.Append("  Ttl: ").Append(Ttl).Append("\n");
             sb.Append("  TtlState: ").Append(TtlState).Append("\n");
@@ -402,6 +419,7 @@ namespace Moira.ApiClient.Model
             Option<string> expression = default;
             Option<string> pythonExpression = default;
             Option<MoiraScheduleData> sched = default;
+            Option<string> teamId = default;
             Option<string> triggerSource = default;
             Option<long?> ttl = default;
             Option<string> ttlState = default;
@@ -482,6 +500,9 @@ namespace Moira.ApiClient.Model
                             break;
                         case "sched":
                             sched = new Option<MoiraScheduleData>(JsonSerializer.Deserialize<MoiraScheduleData>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "team_id":
+                            teamId = new Option<string>(utf8JsonReader.GetString());
                             break;
                         case "trigger_source":
                             triggerSource = new Option<string>(utf8JsonReader.GetString());
@@ -603,7 +624,7 @@ namespace Moira.ApiClient.Model
             if (ttl.IsSet && ttl.Value == null)
                 throw new ArgumentNullException(nameof(ttl), "Property is not nullable for class MoiraTriggerCheck.");
 
-            return new MoiraTriggerCheck(aloneMetrics.Value, createdBy.Value, highlights.Value, id.Value, lastCheck.Value, muteNewMetrics.Value.Value, name.Value, patterns.Value, tags.Value, targets.Value, throttling.Value.Value, triggerType.Value, updatedBy.Value, clusterId, createdAt.Value, desc, errorValue.Value, expression, pythonExpression, sched, triggerSource, ttl, ttlState, updatedAt.Value, warnValue.Value);
+            return new MoiraTriggerCheck(aloneMetrics.Value, createdBy.Value, highlights.Value, id.Value, lastCheck.Value, muteNewMetrics.Value.Value, name.Value, patterns.Value, tags.Value, targets.Value, throttling.Value.Value, triggerType.Value, updatedBy.Value, clusterId, createdAt.Value, desc, errorValue.Value, expression, pythonExpression, sched, teamId, triggerSource, ttl, ttlState, updatedAt.Value, warnValue.Value);
         }
 
         /// <summary>
@@ -734,6 +755,12 @@ namespace Moira.ApiClient.Model
                 }
                 else
                     writer.WriteNull("sched");
+            if (moiraTriggerCheck.TeamIdOption.IsSet)
+                if (moiraTriggerCheck.TeamIdOption.Value != null)
+                    writer.WriteString("team_id", moiraTriggerCheck.TeamId);
+                else
+                    writer.WriteNull("team_id");
+
             if (moiraTriggerCheck.TriggerSourceOption.IsSet)
                 writer.WriteString("trigger_source", moiraTriggerCheck.TriggerSource);
 

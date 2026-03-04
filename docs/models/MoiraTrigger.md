@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **Expression** | **string** |  | [optional] 
 **PythonExpression** | **string** |  | [optional] 
 **Sched** | [**MoiraScheduleData**](MoiraScheduleData.md) |  | [optional] 
+**TeamId** | **string** |  | [optional] 
 **TriggerSource** | **string** |  | [optional] 
 **Ttl** | **long** |  | [optional] 
 **TtlState** | **string** |  | [optional] 
