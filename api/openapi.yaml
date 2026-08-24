@@ -2781,6 +2781,40 @@ paths:
       summary: Validates trigger target
       tags:
       - trigger
+  /trigger/heavy:
+    get:
+      operationId: get-all-heavy-triggers
+      parameters:
+      - description: Defines the number of metrics in trigger.
+        explode: true
+        in: query
+        name: from
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/dto.TriggersList"
+          description: Fetched all heavy triggers
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/api.ErrorResponse"
+          description: Render error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/api.ErrorResponse"
+          description: Internal server error
+      summary: Get all heavy triggers
+      tags:
+      - trigger
   /trigger/noisiness:
     get:
       operationId: get-triggers-noisiness
@@ -4637,6 +4671,7 @@ components:
       - usernames
     dto.TeamModel:
       example:
+        metadata: "{\"meta_id\":\"example_id\"}"
         name: Infrastructure Team
         description: Team that holds all members of infrastructure division
         id: d5d98eb3-ee18-4f75-9364-244f67e23b54
@@ -4646,6 +4681,9 @@ components:
           type: string
         id:
           example: d5d98eb3-ee18-4f75-9364-244f67e23b54
+          type: string
+        metadata:
+          example: "{\"meta_id\":\"example_id\"}"
           type: string
         name:
           example: Infrastructure Team
@@ -4758,10 +4796,12 @@ components:
         size: 100
         page: 0
         list:
-        - name: Infrastructure Team
+        - metadata: "{\"meta_id\":\"example_id\"}"
+          name: Infrastructure Team
           description: Team that holds all members of infrastructure division
           id: d5d98eb3-ee18-4f75-9364-244f67e23b54
-        - name: Infrastructure Team
+        - metadata: "{\"meta_id\":\"example_id\"}"
+          name: Infrastructure Team
           description: Team that holds all members of infrastructure division
           id: d5d98eb3-ee18-4f75-9364-244f67e23b54
       properties:
@@ -6035,10 +6075,12 @@ components:
     dto.UserTeams:
       example:
         teams:
-        - name: Infrastructure Team
+        - metadata: "{\"meta_id\":\"example_id\"}"
+          name: Infrastructure Team
           description: Team that holds all members of infrastructure division
           id: d5d98eb3-ee18-4f75-9364-244f67e23b54
-        - name: Infrastructure Team
+        - metadata: "{\"meta_id\":\"example_id\"}"
+          name: Infrastructure Team
           description: Team that holds all members of infrastructure division
           id: d5d98eb3-ee18-4f75-9364-244f67e23b54
       properties:

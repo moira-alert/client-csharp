@@ -9,6 +9,7 @@ All URIs are relative to */api*
 | [**DeleteTriggerMetric**](TriggerApi.md#deletetriggermetric) | **DELETE** /trigger/{triggerID}/metrics | Delete metric from last check and all trigger pattern metrics |
 | [**DeleteTriggerNodataMetrics**](TriggerApi.md#deletetriggernodatametrics) | **DELETE** /trigger/{triggerID}/metrics/nodata | Delete all metrics from last data which are in NODATA state. It also deletes all trigger patterns of those metrics |
 | [**DeleteTriggerThrottling**](TriggerApi.md#deletetriggerthrottling) | **DELETE** /trigger/{triggerID}/throttling | Deletes throttling for a trigger |
+| [**GetAllHeavyTriggers**](TriggerApi.md#getallheavytriggers) | **GET** /trigger/heavy | Get all heavy triggers |
 | [**GetAllTriggers**](TriggerApi.md#getalltriggers) | **GET** /trigger | Get all triggers |
 | [**GetTrigger**](TriggerApi.md#gettrigger) | **GET** /trigger/{triggerID} | Get an existing trigger |
 | [**GetTriggerDump**](TriggerApi.md#gettriggerdump) | **GET** /trigger/{triggerID}/dump | Get trigger dump |
@@ -208,6 +209,42 @@ No authorization required
 |-------------|-------------|------------------|
 | **200** | Trigger throttling has been deleted |  -  |
 | **404** | Resource not found |  -  |
+| **500** | Internal server error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a id="getallheavytriggers"></a>
+# **GetAllHeavyTriggers**
+> DtoTriggersList GetAllHeavyTriggers (int from = null)
+
+Get all heavy triggers
+
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **from** | **int** | Defines the number of metrics in trigger. | [optional]  |
+
+### Return type
+
+[**DtoTriggersList**](DtoTriggersList.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Fetched all heavy triggers |  -  |
+| **422** | Render error |  -  |
 | **500** | Internal server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)

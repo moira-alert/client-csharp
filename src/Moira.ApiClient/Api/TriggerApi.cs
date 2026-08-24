@@ -153,6 +153,29 @@ namespace Moira.ApiClient.Api
         Task<IDeleteTriggerThrottlingApiResponse> DeleteTriggerThrottlingOrDefaultAsync(string triggerID, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Get all heavy triggers
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="from">Defines the number of metrics in trigger. (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetAllHeavyTriggersApiResponse"/>&gt;</returns>
+        Task<IGetAllHeavyTriggersApiResponse> GetAllHeavyTriggersAsync(Option<int> from = default, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get all heavy triggers
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="from">Defines the number of metrics in trigger. (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetAllHeavyTriggersApiResponse"/>&gt;</returns>
+        Task<IGetAllHeavyTriggersApiResponse> GetAllHeavyTriggersOrDefaultAsync(Option<int> from = default, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Get all triggers
         /// </summary>
         /// <remarks>
@@ -667,6 +690,30 @@ namespace Moira.ApiClient.Api
         /// </summary>
         /// <returns></returns>
         bool IsNotFound { get; }
+
+        /// <summary>
+        /// Returns true if the response is 500 InternalServerError
+        /// </summary>
+        /// <returns></returns>
+        bool IsInternalServerError { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="IGetAllHeavyTriggersApiResponse"/>
+    /// </summary>
+    public interface IGetAllHeavyTriggersApiResponse : Moira.ApiClient.Client.IApiResponse, IOk<Moira.ApiClient.Model.DtoTriggersList>, IUnprocessableContent<Moira.ApiClient.Model.ApiErrorResponse>, IInternalServerError<Moira.ApiClient.Model.ApiErrorResponse>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 422 UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnprocessableContent { get; }
 
         /// <summary>
         /// Returns true if the response is 500 InternalServerError
@@ -1198,6 +1245,26 @@ namespace Moira.ApiClient.Api
         internal void ExecuteOnErrorDeleteTriggerThrottling(Exception exception)
         {
             OnErrorDeleteTriggerThrottling?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs> OnGetAllHeavyTriggers;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs> OnErrorGetAllHeavyTriggers;
+
+        internal void ExecuteOnGetAllHeavyTriggers(TriggerApi.GetAllHeavyTriggersApiResponse apiResponse)
+        {
+            OnGetAllHeavyTriggers?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorGetAllHeavyTriggers(Exception exception)
+        {
+            OnErrorGetAllHeavyTriggers?.Invoke(this, new ExceptionEventArgs(exception));
         }
 
         /// <summary>
@@ -3186,6 +3253,294 @@ namespace Moira.ApiClient.Api
                 } catch (Exception e)
                 {
                     OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)404);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 500 InternalServerError
+            /// </summary>
+            /// <returns></returns>
+            public bool IsInternalServerError => 500 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 500 InternalServerError
+            /// </summary>
+            /// <returns></returns>
+            public Moira.ApiClient.Model.ApiErrorResponse InternalServerError()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsInternalServerError
+                    ? System.Text.Json.JsonSerializer.Deserialize<Moira.ApiClient.Model.ApiErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : default;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 500 InternalServerError and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryInternalServerError(out Moira.ApiClient.Model.ApiErrorResponse result)
+            {
+                result = null;
+
+                try
+                {
+                    result = InternalServerError();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)500);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatGetAllHeavyTriggers(ref Option<int> from);
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="from"></param>
+        private void AfterGetAllHeavyTriggersDefaultImplementation(IGetAllHeavyTriggersApiResponse apiResponseLocalVar, Option<int> from)
+        {
+            bool suppressDefaultLog = false;
+            AfterGetAllHeavyTriggers(ref suppressDefaultLog, apiResponseLocalVar, from);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {3}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="from"></param>
+        partial void AfterGetAllHeavyTriggers(ref bool suppressDefaultLog, IGetAllHeavyTriggersApiResponse apiResponseLocalVar, Option<int> from);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="from"></param>
+        private void OnErrorGetAllHeavyTriggersDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> from)
+        {
+            bool suppressDefaultLogLocalVar = false;
+            OnErrorGetAllHeavyTriggers(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, from);
+            if (!suppressDefaultLogLocalVar)
+                Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLogLocalVar"></param>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="from"></param>
+        partial void OnErrorGetAllHeavyTriggers(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> from);
+
+        /// <summary>
+        /// Get all heavy triggers 
+        /// </summary>
+        /// <param name="from">Defines the number of metrics in trigger. (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetAllHeavyTriggersApiResponse"/>&gt;</returns>
+        public async Task<IGetAllHeavyTriggersApiResponse> GetAllHeavyTriggersOrDefaultAsync(Option<int> from = default, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await GetAllHeavyTriggersAsync(from, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Get all heavy triggers 
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="from">Defines the number of metrics in trigger. (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetAllHeavyTriggersApiResponse"/>&gt;</returns>
+        public async Task<IGetAllHeavyTriggersApiResponse> GetAllHeavyTriggersAsync(Option<int> from = default, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                FormatGetAllHeavyTriggers(ref from);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
+                        ? "/trigger/heavy"
+                        : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/trigger/heavy");
+
+                    System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
+
+                    if (from.IsSet)
+                        parseQueryStringLocalVar["from"] = ClientUtils.ParameterToString(from.Value);
+
+                    uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    string acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+
+                    if (acceptLocalVar != null)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    httpRequestMessageLocalVar.Method = new HttpMethod("GET");
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                        ILogger<GetAllHeavyTriggersApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GetAllHeavyTriggersApiResponse>();
+
+                        GetAllHeavyTriggersApiResponse apiResponseLocalVar = new GetAllHeavyTriggersApiResponse(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/trigger/heavy", requestedAtLocalVar, _jsonSerializerOptions);
+
+                        AfterGetAllHeavyTriggersDefaultImplementation(apiResponseLocalVar, from);
+
+                        Events.ExecuteOnGetAllHeavyTriggers(apiResponseLocalVar);
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorGetAllHeavyTriggersDefaultImplementation(e, "/trigger/heavy", uriBuilderLocalVar.Path, from);
+                Events.ExecuteOnErrorGetAllHeavyTriggers(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="GetAllHeavyTriggersApiResponse"/>
+        /// </summary>
+        public partial class GetAllHeavyTriggersApiResponse : Moira.ApiClient.Client.ApiResponse, IGetAllHeavyTriggersApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<GetAllHeavyTriggersApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="GetAllHeavyTriggersApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GetAllHeavyTriggersApiResponse(ILogger<GetAllHeavyTriggersApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public Moira.ApiClient.Model.DtoTriggersList Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<Moira.ApiClient.Model.DtoTriggersList>(RawContent, _jsonSerializerOptions)
+                    : default;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk(out Moira.ApiClient.Model.DtoTriggersList result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnprocessableContent => 422 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public Moira.ApiClient.Model.ApiErrorResponse UnprocessableContent()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnprocessableContent
+                    ? System.Text.Json.JsonSerializer.Deserialize<Moira.ApiClient.Model.ApiErrorResponse>(RawContent, _jsonSerializerOptions)
+                    : default;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnprocessableContent(out Moira.ApiClient.Model.ApiErrorResponse result)
+            {
+                result = null;
+
+                try
+                {
+                    result = UnprocessableContent();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)422);
                 }
 
                 return result != null;

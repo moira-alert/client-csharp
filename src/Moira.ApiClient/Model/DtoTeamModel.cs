@@ -35,12 +35,14 @@ namespace Moira.ApiClient.Model
         /// <param name="id">id</param>
         /// <param name="name">name</param>
         /// <param name="description">description</param>
+        /// <param name="metadata">metadata</param>
         [JsonConstructor]
-        public DtoTeamModel(string id, string name, Option<string> description = default)
+        public DtoTeamModel(string id, string name, Option<string> description = default, Option<string> metadata = default)
         {
             Id = id;
             Name = name;
             DescriptionOption = description;
+            MetadataOption = metadata;
             OnCreated();
         }
 
@@ -75,6 +77,20 @@ namespace Moira.ApiClient.Model
         public string Description { get { return this.DescriptionOption; } set { this.DescriptionOption = new Option<string>(value); } }
 
         /// <summary>
+        /// Used to track the state of Metadata
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string> MetadataOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Metadata
+        /// </summary>
+        /* <example>{&quot;meta_id&quot;:&quot;example_id&quot;}</example> */
+        [JsonPropertyName("metadata")]
+        public string Metadata { get { return this.MetadataOption; } set { this.MetadataOption = new Option<string>(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -85,6 +101,7 @@ namespace Moira.ApiClient.Model
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
+            sb.Append("  Metadata: ").Append(Metadata).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -125,6 +142,7 @@ namespace Moira.ApiClient.Model
             Option<string> id = default;
             Option<string> name = default;
             Option<string> description = default;
+            Option<string> metadata = default;
 
             while (utf8JsonReader.Read())
             {
@@ -150,6 +168,9 @@ namespace Moira.ApiClient.Model
                         case "description":
                             description = new Option<string>(utf8JsonReader.GetString());
                             break;
+                        case "metadata":
+                            metadata = new Option<string>(utf8JsonReader.GetString());
+                            break;
                         default:
                             break;
                     }
@@ -171,7 +192,10 @@ namespace Moira.ApiClient.Model
             if (description.IsSet && description.Value == null)
                 throw new ArgumentNullException(nameof(description), "Property is not nullable for class DtoTeamModel.");
 
-            return new DtoTeamModel(id.Value, name.Value, description);
+            if (metadata.IsSet && metadata.Value == null)
+                throw new ArgumentNullException(nameof(metadata), "Property is not nullable for class DtoTeamModel.");
+
+            return new DtoTeamModel(id.Value, name.Value, description, metadata);
         }
 
         /// <summary>
@@ -207,12 +231,18 @@ namespace Moira.ApiClient.Model
             if (dtoTeamModel.DescriptionOption.IsSet && dtoTeamModel.Description == null)
                 throw new ArgumentNullException(nameof(dtoTeamModel.Description), "Property is required for class DtoTeamModel.");
 
+            if (dtoTeamModel.MetadataOption.IsSet && dtoTeamModel.Metadata == null)
+                throw new ArgumentNullException(nameof(dtoTeamModel.Metadata), "Property is required for class DtoTeamModel.");
+
             writer.WriteString("id", dtoTeamModel.Id);
 
             writer.WriteString("name", dtoTeamModel.Name);
 
             if (dtoTeamModel.DescriptionOption.IsSet)
                 writer.WriteString("description", dtoTeamModel.Description);
+
+            if (dtoTeamModel.MetadataOption.IsSet)
+                writer.WriteString("metadata", dtoTeamModel.Metadata);
         }
     }
 }
