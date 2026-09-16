@@ -3854,27 +3854,31 @@ components:
         - ' DevOps.my_server.hdd.freespace_mbytes'
         - ' DevOps.my_server.db.*'
         triggers:
-        - error_value: 1000
-          expression: ""
-          patterns:
-          - ""
-          trigger_type: rising
+        - trigger_type: rising
           alone_metrics:
             t1: true
           is_remote: false
-          mute_new_metrics: false
           created_at: created_at
           trigger_source: graphite_local
           team_id: d844f26b-4646-4fca-b43c-a871cc21169a
-          ttl_state: NODATA
-          created_by: created_by
           targets:
           - devOps.my_server.hdd.freespace_mbytes
+          warn_keep_firing_for: 0
+          cluster_id: default
+          updated_at: updated_at
+          id: 292516ed-4924-4154-a62c-ebe312431fce
+          error_value: 1000
+          expression: ""
+          error_keep_firing_for: 0
+          patterns:
+          - ""
+          mute_new_metrics: false
+          ttl_state: NODATA
+          created_by: created_by
           ttl: 600
           tags:
           - server
           - disk
-          cluster_id: default
           sched:
             endOffset: 1439
             startOffset: 0
@@ -3884,33 +3888,37 @@ components:
               enabled: true
             - name: Mon
               enabled: true
-          updated_at: updated_at
           warn_value: 500
           name: Not enough disk space left
           updated_by: updated_by
-          id: 292516ed-4924-4154-a62c-ebe312431fce
+          error_for: 0
+          warn_for: 0
           desc: check the size of /var/log
-        - error_value: 1000
-          expression: ""
-          patterns:
-          - ""
-          trigger_type: rising
+        - trigger_type: rising
           alone_metrics:
             t1: true
           is_remote: false
-          mute_new_metrics: false
           created_at: created_at
           trigger_source: graphite_local
           team_id: d844f26b-4646-4fca-b43c-a871cc21169a
-          ttl_state: NODATA
-          created_by: created_by
           targets:
           - devOps.my_server.hdd.freespace_mbytes
+          warn_keep_firing_for: 0
+          cluster_id: default
+          updated_at: updated_at
+          id: 292516ed-4924-4154-a62c-ebe312431fce
+          error_value: 1000
+          expression: ""
+          error_keep_firing_for: 0
+          patterns:
+          - ""
+          mute_new_metrics: false
+          ttl_state: NODATA
+          created_by: created_by
           ttl: 600
           tags:
           - server
           - disk
-          cluster_id: default
           sched:
             endOffset: 1439
             startOffset: 0
@@ -3920,11 +3928,11 @@ components:
               enabled: true
             - name: Mon
               enabled: true
-          updated_at: updated_at
           warn_value: 500
           name: Not enough disk space left
           updated_by: updated_by
-          id: 292516ed-4924-4154-a62c-ebe312431fce
+          error_for: 0
+          warn_for: 0
           desc: check the size of /var/log
       properties:
         metrics:
@@ -3957,27 +3965,31 @@ components:
           - ' DevOps.my_server.hdd.freespace_mbytes'
           - ' DevOps.my_server.db.*'
           triggers:
-          - error_value: 1000
-            expression: ""
-            patterns:
-            - ""
-            trigger_type: rising
+          - trigger_type: rising
             alone_metrics:
               t1: true
             is_remote: false
-            mute_new_metrics: false
             created_at: created_at
             trigger_source: graphite_local
             team_id: d844f26b-4646-4fca-b43c-a871cc21169a
-            ttl_state: NODATA
-            created_by: created_by
             targets:
             - devOps.my_server.hdd.freespace_mbytes
+            warn_keep_firing_for: 0
+            cluster_id: default
+            updated_at: updated_at
+            id: 292516ed-4924-4154-a62c-ebe312431fce
+            error_value: 1000
+            expression: ""
+            error_keep_firing_for: 0
+            patterns:
+            - ""
+            mute_new_metrics: false
+            ttl_state: NODATA
+            created_by: created_by
             ttl: 600
             tags:
             - server
             - disk
-            cluster_id: default
             sched:
               endOffset: 1439
               startOffset: 0
@@ -3987,33 +3999,37 @@ components:
                 enabled: true
               - name: Mon
                 enabled: true
-            updated_at: updated_at
             warn_value: 500
             name: Not enough disk space left
             updated_by: updated_by
-            id: 292516ed-4924-4154-a62c-ebe312431fce
+            error_for: 0
+            warn_for: 0
             desc: check the size of /var/log
-          - error_value: 1000
-            expression: ""
-            patterns:
-            - ""
-            trigger_type: rising
+          - trigger_type: rising
             alone_metrics:
               t1: true
             is_remote: false
-            mute_new_metrics: false
             created_at: created_at
             trigger_source: graphite_local
             team_id: d844f26b-4646-4fca-b43c-a871cc21169a
-            ttl_state: NODATA
-            created_by: created_by
             targets:
             - devOps.my_server.hdd.freespace_mbytes
+            warn_keep_firing_for: 0
+            cluster_id: default
+            updated_at: updated_at
+            id: 292516ed-4924-4154-a62c-ebe312431fce
+            error_value: 1000
+            expression: ""
+            error_keep_firing_for: 0
+            patterns:
+            - ""
+            mute_new_metrics: false
+            ttl_state: NODATA
+            created_by: created_by
             ttl: 600
             tags:
             - server
             - disk
-            cluster_id: default
             sched:
               endOffset: 1439
               startOffset: 0
@@ -4023,11 +4039,11 @@ components:
                 enabled: true
               - name: Mon
                 enabled: true
-            updated_at: updated_at
             warn_value: 500
             name: Not enough disk space left
             updated_by: updated_by
-            id: 292516ed-4924-4154-a62c-ebe312431fce
+            error_for: 0
+            warn_for: 0
             desc: check the size of /var/log
         - pattern: Devops.my_server.*
           metrics:
@@ -4035,27 +4051,31 @@ components:
           - ' DevOps.my_server.hdd.freespace_mbytes'
           - ' DevOps.my_server.db.*'
           triggers:
-          - error_value: 1000
-            expression: ""
-            patterns:
-            - ""
-            trigger_type: rising
+          - trigger_type: rising
             alone_metrics:
               t1: true
             is_remote: false
-            mute_new_metrics: false
             created_at: created_at
             trigger_source: graphite_local
             team_id: d844f26b-4646-4fca-b43c-a871cc21169a
-            ttl_state: NODATA
-            created_by: created_by
             targets:
             - devOps.my_server.hdd.freespace_mbytes
+            warn_keep_firing_for: 0
+            cluster_id: default
+            updated_at: updated_at
+            id: 292516ed-4924-4154-a62c-ebe312431fce
+            error_value: 1000
+            expression: ""
+            error_keep_firing_for: 0
+            patterns:
+            - ""
+            mute_new_metrics: false
+            ttl_state: NODATA
+            created_by: created_by
             ttl: 600
             tags:
             - server
             - disk
-            cluster_id: default
             sched:
               endOffset: 1439
               startOffset: 0
@@ -4065,33 +4085,37 @@ components:
                 enabled: true
               - name: Mon
                 enabled: true
-            updated_at: updated_at
             warn_value: 500
             name: Not enough disk space left
             updated_by: updated_by
-            id: 292516ed-4924-4154-a62c-ebe312431fce
+            error_for: 0
+            warn_for: 0
             desc: check the size of /var/log
-          - error_value: 1000
-            expression: ""
-            patterns:
-            - ""
-            trigger_type: rising
+          - trigger_type: rising
             alone_metrics:
               t1: true
             is_remote: false
-            mute_new_metrics: false
             created_at: created_at
             trigger_source: graphite_local
             team_id: d844f26b-4646-4fca-b43c-a871cc21169a
-            ttl_state: NODATA
-            created_by: created_by
             targets:
             - devOps.my_server.hdd.freespace_mbytes
+            warn_keep_firing_for: 0
+            cluster_id: default
+            updated_at: updated_at
+            id: 292516ed-4924-4154-a62c-ebe312431fce
+            error_value: 1000
+            expression: ""
+            error_keep_firing_for: 0
+            patterns:
+            - ""
+            mute_new_metrics: false
+            ttl_state: NODATA
+            created_by: created_by
             ttl: 600
             tags:
             - server
             - disk
-            cluster_id: default
             sched:
               endOffset: 1439
               startOffset: 0
@@ -4101,11 +4125,11 @@ components:
                 enabled: true
               - name: Mon
                 enabled: true
-            updated_at: updated_at
             warn_value: 500
             name: Not enough disk space left
             updated_by: updated_by
-            id: 292516ed-4924-4154-a62c-ebe312431fce
+            error_for: 0
+            warn_for: 0
             desc: check the size of /var/log
       properties:
         list:
@@ -4859,28 +4883,32 @@ components:
       - syntax_ok
     dto.Trigger:
       example:
-        error_value: 1000
-        expression: ""
-        patterns:
-        - ""
         trigger_type: rising
         alone_metrics:
           t1: true
         is_remote: false
-        mute_new_metrics: false
         created_at: created_at
         trigger_source: graphite_local
         team_id: d844f26b-4646-4fca-b43c-a871cc21169a
-        ttl_state: NODATA
-        created_by: created_by
         targets:
         - devOps.my_server.hdd.freespace_mbytes
+        warn_keep_firing_for: 0
+        cluster_id: default
+        throttling: 0
+        updated_at: updated_at
+        id: 292516ed-4924-4154-a62c-ebe312431fce
+        error_value: 1000
+        expression: ""
+        error_keep_firing_for: 0
+        patterns:
+        - ""
+        mute_new_metrics: false
+        ttl_state: NODATA
+        created_by: created_by
         ttl: 600
         tags:
         - server
         - disk
-        cluster_id: default
-        throttling: 0
         sched:
           endOffset: 1439
           startOffset: 0
@@ -4890,11 +4918,11 @@ components:
             enabled: true
           - name: Mon
             enabled: true
-        updated_at: updated_at
         warn_value: 500
         name: Not enough disk space left
         updated_by: updated_by
-        id: 292516ed-4924-4154-a62c-ebe312431fce
+        error_for: 0
+        warn_for: 0
         desc: check the size of /var/log
       properties:
         alone_metrics:
@@ -4919,6 +4947,18 @@ components:
           example: check the size of /var/log
           type: string
           x-nullable: true
+        error_for:
+          description: Seconds the metric must be continuously >= ErrorValue before
+            ERROR fires. 0 means fire instantly.
+          example: 0
+          format: int64
+          type: integer
+        error_keep_firing_for:
+          description: Seconds to keep reporting ERROR after the metric drops below
+            ErrorValue. 0 means resolve instantly.
+          example: 0
+          format: int64
+          type: integer
         error_value:
           description: ERROR threshold
           example: 1000
@@ -5011,6 +5051,18 @@ components:
         updated_by:
           description: Username who updated trigger
           type: string
+        warn_for:
+          description: Seconds the metric must be continuously >= WarnValue before
+            WARN fires. 0 means fire instantly.
+          example: 0
+          format: int64
+          type: integer
+        warn_keep_firing_for:
+          description: Seconds to keep reporting WARN after the metric drops below
+            WarnValue. 0 means resolve instantly.
+          example: 0
+          format: int64
+          type: integer
         warn_value:
           description: WARN threshold
           example: 500
@@ -5054,20 +5106,24 @@ components:
           t2: metric.name.2
         metrics:
           key:
+            warn_since: 0
+            values:
+              key: 6.027456183070403
+            deleted_but_kept: false
+            event_timestamp: 1590741878
+            suppressed_state: suppressed_state
+            error_since: 0
+            error_recover_since: 0
             maintenance_info:
               setup_time: 0
               setup_user: setup_user
               remove_user: remove_user
               remove_time: 0
-            values:
-              key: 6.027456183070403
-            deleted_but_kept: false
             state: OK
             suppressed: false
-            event_timestamp: 1590741878
+            warn_recover_since: 0
             maintenance: 0
             value: 70
-            suppressed_state: suppressed_state
             timestamp: 1590741878
         state: OK
         suppressed: true
@@ -5181,20 +5237,24 @@ components:
             t2: metric.name.2
           metrics:
             key:
+              warn_since: 0
+              values:
+                key: 6.027456183070403
+              deleted_but_kept: false
+              event_timestamp: 1590741878
+              suppressed_state: suppressed_state
+              error_since: 0
+              error_recover_since: 0
               maintenance_info:
                 setup_time: 0
                 setup_user: setup_user
                 remove_user: remove_user
                 remove_time: 0
-              values:
-                key: 6.027456183070403
-              deleted_but_kept: false
               state: OK
               suppressed: false
-              event_timestamp: 1590741878
+              warn_recover_since: 0
               maintenance: 0
               value: 70
-              suppressed_state: suppressed_state
               timestamp: 1590741878
           state: OK
           suppressed: true
@@ -5227,26 +5287,31 @@ components:
           retention:
             key: 5
         trigger:
-          error_value: 1000
-          expression: ""
-          patterns:
-          - ""
           trigger_type: rising
           alone_metrics:
             t1: true
-          mute_new_metrics: false
           created_at: 5
           trigger_source: graphite_local
           team_id: d844f26b-4646-4fca-b43c-a871cc21169a
-          ttl_state: NODATA
-          created_by: created_by
           targets:
           - devOps.my_server.hdd.freespace_mbytes
+          warn_keep_firing_for: 0
+          cluster_id: default
+          updated_at: 2
+          id: 292516ed-4924-4154-a62c-ebe312431fce
+          python_expression: python_expression
+          error_value: 1000
+          expression: ""
+          error_keep_firing_for: 0
+          patterns:
+          - ""
+          mute_new_metrics: false
+          ttl_state: NODATA
+          created_by: created_by
           ttl: 600
           tags:
           - server
           - disk
-          cluster_id: default
           sched:
             endOffset: 1439
             startOffset: 0
@@ -5256,12 +5321,11 @@ components:
               enabled: true
             - name: Mon
               enabled: true
-          updated_at: 2
           warn_value: 5000
           name: Not enough disk space left
           updated_by: updated_by
-          id: 292516ed-4924-4154-a62c-ebe312431fce
-          python_expression: python_expression
+          error_for: 0
+          warn_for: 0
           desc: check the size of /var/log
       properties:
         created:
@@ -5299,27 +5363,31 @@ components:
             $ref: "#/components/schemas/moira.MetricValue"
     dto.TriggerModel:
       example:
-        error_value: 1000
-        expression: ""
-        patterns:
-        - ""
         trigger_type: rising
         alone_metrics:
           t1: true
         is_remote: false
-        mute_new_metrics: false
         created_at: created_at
         trigger_source: graphite_local
         team_id: d844f26b-4646-4fca-b43c-a871cc21169a
-        ttl_state: NODATA
-        created_by: created_by
         targets:
         - devOps.my_server.hdd.freespace_mbytes
+        warn_keep_firing_for: 0
+        cluster_id: default
+        updated_at: updated_at
+        id: 292516ed-4924-4154-a62c-ebe312431fce
+        error_value: 1000
+        expression: ""
+        error_keep_firing_for: 0
+        patterns:
+        - ""
+        mute_new_metrics: false
+        ttl_state: NODATA
+        created_by: created_by
         ttl: 600
         tags:
         - server
         - disk
-        cluster_id: default
         sched:
           endOffset: 1439
           startOffset: 0
@@ -5329,11 +5397,11 @@ components:
             enabled: true
           - name: Mon
             enabled: true
-        updated_at: updated_at
         warn_value: 500
         name: Not enough disk space left
         updated_by: updated_by
-        id: 292516ed-4924-4154-a62c-ebe312431fce
+        error_for: 0
+        warn_for: 0
         desc: check the size of /var/log
       properties:
         alone_metrics:
@@ -5358,6 +5426,18 @@ components:
           example: check the size of /var/log
           type: string
           x-nullable: true
+        error_for:
+          description: Seconds the metric must be continuously >= ErrorValue before
+            ERROR fires. 0 means fire instantly.
+          example: 0
+          format: int64
+          type: integer
+        error_keep_firing_for:
+          description: Seconds to keep reporting ERROR after the metric drops below
+            ErrorValue. 0 means resolve instantly.
+          example: 0
+          format: int64
+          type: integer
         error_value:
           description: ERROR threshold
           example: 1000
@@ -5446,6 +5526,18 @@ components:
         updated_by:
           description: Username who updated trigger
           type: string
+        warn_for:
+          description: Seconds the metric must be continuously >= WarnValue before
+            WARN fires. 0 means fire instantly.
+          example: 0
+          format: int64
+          type: integer
+        warn_keep_firing_for:
+          description: Seconds to keep reporting WARN after the metric drops below
+            WarnValue. 0 means resolve instantly.
+          example: 0
+          format: int64
+          type: integer
         warn_value:
           description: WARN threshold
           example: 500
@@ -5481,12 +5573,14 @@ components:
         team_id: d844f26b-4646-4fca-b43c-a871cc21169a
         targets:
         - devOps.my_server.hdd.freespace_mbytes
+        warn_keep_firing_for: 0
         cluster_id: default
         throttling: 0
         updated_at: updated_at
         id: 292516ed-4924-4154-a62c-ebe312431fce
         error_value: 1000
         expression: ""
+        error_keep_firing_for: 0
         patterns:
         - ""
         mute_new_metrics: false
@@ -5509,6 +5603,8 @@ components:
         warn_value: 500
         name: Not enough disk space left
         updated_by: updated_by
+        error_for: 0
+        warn_for: 0
         desc: check the size of /var/log
       properties:
         alone_metrics:
@@ -5533,6 +5629,18 @@ components:
           example: check the size of /var/log
           type: string
           x-nullable: true
+        error_for:
+          description: Seconds the metric must be continuously >= ErrorValue before
+            ERROR fires. 0 means fire instantly.
+          example: 0
+          format: int64
+          type: integer
+        error_keep_firing_for:
+          description: Seconds to keep reporting ERROR after the metric drops below
+            ErrorValue. 0 means resolve instantly.
+          example: 0
+          format: int64
+          type: integer
         error_value:
           description: ERROR threshold
           example: 1000
@@ -5628,6 +5736,18 @@ components:
         updated_by:
           description: Username who updated trigger
           type: string
+        warn_for:
+          description: Seconds the metric must be continuously >= WarnValue before
+            WARN fires. 0 means fire instantly.
+          example: 0
+          format: int64
+          type: integer
+        warn_keep_firing_for:
+          description: Seconds to keep reporting WARN after the metric drops below
+            WarnValue. 0 means resolve instantly.
+          example: 0
+          format: int64
+          type: integer
         warn_value:
           description: WARN threshold
           example: 500
@@ -5669,12 +5789,14 @@ components:
           team_id: d844f26b-4646-4fca-b43c-a871cc21169a
           targets:
           - devOps.my_server.hdd.freespace_mbytes
+          warn_keep_firing_for: 0
           cluster_id: default
           throttling: 0
           updated_at: updated_at
           id: 292516ed-4924-4154-a62c-ebe312431fce
           error_value: 1000
           expression: ""
+          error_keep_firing_for: 0
           patterns:
           - ""
           mute_new_metrics: false
@@ -5697,6 +5819,8 @@ components:
           warn_value: 500
           name: Not enough disk space left
           updated_by: updated_by
+          error_for: 0
+          warn_for: 0
           desc: check the size of /var/log
         - trigger_type: rising
           alone_metrics:
@@ -5707,12 +5831,14 @@ components:
           team_id: d844f26b-4646-4fca-b43c-a871cc21169a
           targets:
           - devOps.my_server.hdd.freespace_mbytes
+          warn_keep_firing_for: 0
           cluster_id: default
           throttling: 0
           updated_at: updated_at
           id: 292516ed-4924-4154-a62c-ebe312431fce
           error_value: 1000
           expression: ""
+          error_keep_firing_for: 0
           patterns:
           - ""
           mute_new_metrics: false
@@ -5735,6 +5861,8 @@ components:
           warn_value: 500
           name: Not enough disk space left
           updated_by: updated_by
+          error_for: 0
+          warn_for: 0
           desc: check the size of /var/log
       properties:
         list:
@@ -5778,6 +5906,7 @@ components:
           team_id: d844f26b-4646-4fca-b43c-a871cc21169a
           targets:
           - devOps.my_server.hdd.freespace_mbytes
+          warn_keep_firing_for: 0
           cluster_id: default
           throttling: 0
           updated_at: 1
@@ -5785,6 +5914,7 @@ components:
           python_expression: python_expression
           error_value: 1000
           expression: ""
+          error_keep_firing_for: 0
           patterns:
           - ""
           mute_new_metrics: false
@@ -5808,6 +5938,7 @@ components:
           warn_value: 5000
           name: Not enough disk space left
           updated_by: updated_by
+          error_for: 0
           last_check:
             msg: msg
             score: 100
@@ -5821,20 +5952,24 @@ components:
               t2: metric.name.2
             metrics:
               key:
+                warn_since: 0
+                values:
+                  key: 6.027456183070403
+                deleted_but_kept: false
+                event_timestamp: 1590741878
+                suppressed_state: suppressed_state
+                error_since: 0
+                error_recover_since: 0
                 maintenance_info:
                   setup_time: 0
                   setup_user: setup_user
                   remove_user: remove_user
                   remove_time: 0
-                values:
-                  key: 6.027456183070403
-                deleted_but_kept: false
                 state: OK
                 suppressed: false
-                event_timestamp: 1590741878
+                warn_recover_since: 0
                 maintenance: 0
                 value: 70
-                suppressed_state: suppressed_state
                 timestamp: 1590741878
             state: OK
             suppressed: true
@@ -5843,6 +5978,7 @@ components:
             last_successful_check_timestamp: 1590741916
             suppressed_state: suppressed_state
             timestamp: 1590741916
+          warn_for: 0
           desc: check the size of /var/log
         - trigger_type: rising
           alone_metrics:
@@ -5852,6 +5988,7 @@ components:
           team_id: d844f26b-4646-4fca-b43c-a871cc21169a
           targets:
           - devOps.my_server.hdd.freespace_mbytes
+          warn_keep_firing_for: 0
           cluster_id: default
           throttling: 0
           updated_at: 1
@@ -5859,6 +5996,7 @@ components:
           python_expression: python_expression
           error_value: 1000
           expression: ""
+          error_keep_firing_for: 0
           patterns:
           - ""
           mute_new_metrics: false
@@ -5882,6 +6020,7 @@ components:
           warn_value: 5000
           name: Not enough disk space left
           updated_by: updated_by
+          error_for: 0
           last_check:
             msg: msg
             score: 100
@@ -5895,20 +6034,24 @@ components:
               t2: metric.name.2
             metrics:
               key:
+                warn_since: 0
+                values:
+                  key: 6.027456183070403
+                deleted_but_kept: false
+                event_timestamp: 1590741878
+                suppressed_state: suppressed_state
+                error_since: 0
+                error_recover_since: 0
                 maintenance_info:
                   setup_time: 0
                   setup_user: setup_user
                   remove_user: remove_user
                   remove_time: 0
-                values:
-                  key: 6.027456183070403
-                deleted_but_kept: false
                 state: OK
                 suppressed: false
-                event_timestamp: 1590741878
+                warn_recover_since: 0
                 maintenance: 0
                 value: 70
-                suppressed_state: suppressed_state
                 timestamp: 1590741878
             state: OK
             suppressed: true
@@ -5917,6 +6060,7 @@ components:
             last_successful_check_timestamp: 1590741916
             suppressed_state: suppressed_state
             timestamp: 1590741916
+          warn_for: 0
           desc: check the size of /var/log
       properties:
         list:
@@ -6105,20 +6249,24 @@ components:
           t2: metric.name.2
         metrics:
           key:
+            warn_since: 0
+            values:
+              key: 6.027456183070403
+            deleted_but_kept: false
+            event_timestamp: 1590741878
+            suppressed_state: suppressed_state
+            error_since: 0
+            error_recover_since: 0
             maintenance_info:
               setup_time: 0
               setup_user: setup_user
               remove_user: remove_user
               remove_time: 0
-            values:
-              key: 6.027456183070403
-            deleted_but_kept: false
             state: OK
             suppressed: false
-            event_timestamp: 1590741878
+            warn_recover_since: 0
             maintenance: 0
             value: 70
-            suppressed_state: suppressed_state
             timestamp: 1590741878
         state: OK
         suppressed: true
@@ -6268,20 +6416,24 @@ components:
       x-nullable: true
     moira.MetricState:
       example:
+        warn_since: 0
+        values:
+          key: 6.027456183070403
+        deleted_but_kept: false
+        event_timestamp: 1590741878
+        suppressed_state: suppressed_state
+        error_since: 0
+        error_recover_since: 0
         maintenance_info:
           setup_time: 0
           setup_user: setup_user
           remove_user: remove_user
           remove_time: 0
-        values:
-          key: 6.027456183070403
-        deleted_but_kept: false
         state: OK
         suppressed: false
-        event_timestamp: 1590741878
+        warn_recover_since: 0
         maintenance: 0
         value: 70
-        suppressed_state: suppressed_state
         timestamp: 1590741878
       properties:
         deleted_but_kept:
@@ -6290,6 +6442,18 @@ components:
             and the metric is in Maintenance. The metric remains in the database
           example: false
           type: boolean
+        error_recover_since:
+          description: "ErrorRecoverSince is the unix timestamp when the metric first\
+            \ dropped below ErrorValue after ERROR had fired, 0 if not currently tracked."
+          example: 0
+          format: int64
+          type: integer
+        error_since:
+          description: "ErrorSince is the unix timestamp when the metric first became\
+            \ continuously >= ErrorValue, 0 if not currently tracked."
+          example: 0
+          format: int64
+          type: integer
         event_timestamp:
           example: 1590741878
           format: int64
@@ -6319,6 +6483,19 @@ components:
         values:
           additionalProperties:
             type: number
+        warn_recover_since:
+          description: "WarnRecoverSince is the unix timestamp when the metric first\
+            \ dropped below WarnValue after WARN had fired, 0 if not currently tracked."
+          example: 0
+          format: int64
+          type: integer
+        warn_since:
+          description: |-
+            AloneMetrics    map[string]string  `json:"alone_metrics"` // represents a relation between name of alone metrics and their targets
+            WarnSince is the unix timestamp when the metric first became continuously >= WarnValue, 0 if not currently tracked.
+          example: 0
+          format: int64
+          type: integer
       required:
       - event_timestamp
       - maintenance_info
@@ -6643,26 +6820,31 @@ components:
       - user
     moira.Trigger:
       example:
-        error_value: 1000
-        expression: ""
-        patterns:
-        - ""
         trigger_type: rising
         alone_metrics:
           t1: true
-        mute_new_metrics: false
         created_at: 5
         trigger_source: graphite_local
         team_id: d844f26b-4646-4fca-b43c-a871cc21169a
-        ttl_state: NODATA
-        created_by: created_by
         targets:
         - devOps.my_server.hdd.freespace_mbytes
+        warn_keep_firing_for: 0
+        cluster_id: default
+        updated_at: 2
+        id: 292516ed-4924-4154-a62c-ebe312431fce
+        python_expression: python_expression
+        error_value: 1000
+        expression: ""
+        error_keep_firing_for: 0
+        patterns:
+        - ""
+        mute_new_metrics: false
+        ttl_state: NODATA
+        created_by: created_by
         ttl: 600
         tags:
         - server
         - disk
-        cluster_id: default
         sched:
           endOffset: 1439
           startOffset: 0
@@ -6672,12 +6854,11 @@ components:
             enabled: true
           - name: Mon
             enabled: true
-        updated_at: 2
         warn_value: 5000
         name: Not enough disk space left
         updated_by: updated_by
-        id: 292516ed-4924-4154-a62c-ebe312431fce
-        python_expression: python_expression
+        error_for: 0
+        warn_for: 0
         desc: check the size of /var/log
       properties:
         alone_metrics:
@@ -6698,6 +6879,14 @@ components:
           example: check the size of /var/log
           type: string
           x-nullable: true
+        error_for:
+          example: 0
+          format: int64
+          type: integer
+        error_keep_firing_for:
+          example: 0
+          format: int64
+          type: integer
         error_value:
           example: 1000
           type: number
@@ -6766,6 +6955,14 @@ components:
           x-nullable: true
         updated_by:
           type: string
+        warn_for:
+          example: 0
+          format: int64
+          type: integer
+        warn_keep_firing_for:
+          example: 0
+          format: int64
+          type: integer
         warn_value:
           example: 5000
           type: number
@@ -6795,6 +6992,7 @@ components:
         team_id: d844f26b-4646-4fca-b43c-a871cc21169a
         targets:
         - devOps.my_server.hdd.freespace_mbytes
+        warn_keep_firing_for: 0
         cluster_id: default
         throttling: 0
         updated_at: 1
@@ -6802,6 +7000,7 @@ components:
         python_expression: python_expression
         error_value: 1000
         expression: ""
+        error_keep_firing_for: 0
         patterns:
         - ""
         mute_new_metrics: false
@@ -6825,6 +7024,7 @@ components:
         warn_value: 5000
         name: Not enough disk space left
         updated_by: updated_by
+        error_for: 0
         last_check:
           msg: msg
           score: 100
@@ -6838,20 +7038,24 @@ components:
             t2: metric.name.2
           metrics:
             key:
+              warn_since: 0
+              values:
+                key: 6.027456183070403
+              deleted_but_kept: false
+              event_timestamp: 1590741878
+              suppressed_state: suppressed_state
+              error_since: 0
+              error_recover_since: 0
               maintenance_info:
                 setup_time: 0
                 setup_user: setup_user
                 remove_user: remove_user
                 remove_time: 0
-              values:
-                key: 6.027456183070403
-              deleted_but_kept: false
               state: OK
               suppressed: false
-              event_timestamp: 1590741878
+              warn_recover_since: 0
               maintenance: 0
               value: 70
-              suppressed_state: suppressed_state
               timestamp: 1590741878
           state: OK
           suppressed: true
@@ -6860,6 +7064,7 @@ components:
           last_successful_check_timestamp: 1590741916
           suppressed_state: suppressed_state
           timestamp: 1590741916
+        warn_for: 0
         desc: check the size of /var/log
       properties:
         alone_metrics:
@@ -6880,6 +7085,14 @@ components:
           example: check the size of /var/log
           type: string
           x-nullable: true
+        error_for:
+          example: 0
+          format: int64
+          type: integer
+        error_keep_firing_for:
+          example: 0
+          format: int64
+          type: integer
         error_value:
           example: 1000
           type: number
@@ -6957,6 +7170,14 @@ components:
           x-nullable: true
         updated_by:
           type: string
+        warn_for:
+          example: 0
+          format: int64
+          type: integer
+        warn_keep_firing_for:
+          example: 0
+          format: int64
+          type: integer
         warn_value:
           example: 5000
           type: number
