@@ -45,6 +45,8 @@ namespace Moira.ApiClient.Model
         /// <param name="clusterId">clusterId</param>
         /// <param name="createdAt">createdAt</param>
         /// <param name="desc">desc</param>
+        /// <param name="errorFor">errorFor</param>
+        /// <param name="errorKeepFiringFor">errorKeepFiringFor</param>
         /// <param name="errorValue">errorValue</param>
         /// <param name="expression">expression</param>
         /// <param name="pythonExpression">pythonExpression</param>
@@ -54,9 +56,11 @@ namespace Moira.ApiClient.Model
         /// <param name="ttl">ttl</param>
         /// <param name="ttlState">ttlState</param>
         /// <param name="updatedAt">updatedAt</param>
+        /// <param name="warnFor">warnFor</param>
+        /// <param name="warnKeepFiringFor">warnKeepFiringFor</param>
         /// <param name="warnValue">warnValue</param>
         [JsonConstructor]
-        public MoiraTrigger(Dictionary<string, bool> aloneMetrics, string createdBy, string id, bool muteNewMetrics, string name, List<string> patterns, List<string> tags, List<string> targets, string triggerType, string updatedBy, Option<string> clusterId = default, long? createdAt = default, Option<string> desc = default, decimal? errorValue = default, Option<string> expression = default, Option<string> pythonExpression = default, Option<MoiraScheduleData> sched = default, Option<string> teamId = default, Option<string> triggerSource = default, Option<long?> ttl = default, Option<string> ttlState = default, long? updatedAt = default, decimal? warnValue = default)
+        public MoiraTrigger(Dictionary<string, bool> aloneMetrics, string createdBy, string id, bool muteNewMetrics, string name, List<string> patterns, List<string> tags, List<string> targets, string triggerType, string updatedBy, Option<string> clusterId = default, long? createdAt = default, Option<string> desc = default, Option<long?> errorFor = default, Option<long?> errorKeepFiringFor = default, decimal? errorValue = default, Option<string> expression = default, Option<string> pythonExpression = default, Option<MoiraScheduleData> sched = default, Option<string> teamId = default, Option<string> triggerSource = default, Option<long?> ttl = default, Option<string> ttlState = default, long? updatedAt = default, Option<long?> warnFor = default, Option<long?> warnKeepFiringFor = default, decimal? warnValue = default)
         {
             AloneMetrics = aloneMetrics;
             CreatedBy = createdBy;
@@ -71,6 +75,8 @@ namespace Moira.ApiClient.Model
             ClusterIdOption = clusterId;
             CreatedAt = createdAt;
             DescOption = desc;
+            ErrorForOption = errorFor;
+            ErrorKeepFiringForOption = errorKeepFiringFor;
             ErrorValue = errorValue;
             ExpressionOption = expression;
             PythonExpressionOption = pythonExpression;
@@ -80,6 +86,8 @@ namespace Moira.ApiClient.Model
             TtlOption = ttl;
             TtlStateOption = ttlState;
             UpdatedAt = updatedAt;
+            WarnForOption = warnFor;
+            WarnKeepFiringForOption = warnKeepFiringFor;
             WarnValue = warnValue;
             OnCreated();
         }
@@ -187,6 +195,34 @@ namespace Moira.ApiClient.Model
         /* <example>check the size of /var/log</example> */
         [JsonPropertyName("desc")]
         public string Desc { get { return this.DescOption; } set { this.DescOption = new Option<string>(value); } }
+
+        /// <summary>
+        /// Used to track the state of ErrorFor
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<long?> ErrorForOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ErrorFor
+        /// </summary>
+        /* <example>0</example> */
+        [JsonPropertyName("error_for")]
+        public long? ErrorFor { get { return this.ErrorForOption; } set { this.ErrorForOption = new Option<long?>(value); } }
+
+        /// <summary>
+        /// Used to track the state of ErrorKeepFiringFor
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<long?> ErrorKeepFiringForOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ErrorKeepFiringFor
+        /// </summary>
+        /* <example>0</example> */
+        [JsonPropertyName("error_keep_firing_for")]
+        public long? ErrorKeepFiringFor { get { return this.ErrorKeepFiringForOption; } set { this.ErrorKeepFiringForOption = new Option<long?>(value); } }
 
         /// <summary>
         /// Gets or Sets ErrorValue
@@ -297,6 +333,34 @@ namespace Moira.ApiClient.Model
         public long? UpdatedAt { get; set; }
 
         /// <summary>
+        /// Used to track the state of WarnFor
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<long?> WarnForOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets WarnFor
+        /// </summary>
+        /* <example>0</example> */
+        [JsonPropertyName("warn_for")]
+        public long? WarnFor { get { return this.WarnForOption; } set { this.WarnForOption = new Option<long?>(value); } }
+
+        /// <summary>
+        /// Used to track the state of WarnKeepFiringFor
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<long?> WarnKeepFiringForOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets WarnKeepFiringFor
+        /// </summary>
+        /* <example>0</example> */
+        [JsonPropertyName("warn_keep_firing_for")]
+        public long? WarnKeepFiringFor { get { return this.WarnKeepFiringForOption; } set { this.WarnKeepFiringForOption = new Option<long?>(value); } }
+
+        /// <summary>
         /// Gets or Sets WarnValue
         /// </summary>
         /* <example>5000</example> */
@@ -324,6 +388,8 @@ namespace Moira.ApiClient.Model
             sb.Append("  ClusterId: ").Append(ClusterId).Append("\n");
             sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("  Desc: ").Append(Desc).Append("\n");
+            sb.Append("  ErrorFor: ").Append(ErrorFor).Append("\n");
+            sb.Append("  ErrorKeepFiringFor: ").Append(ErrorKeepFiringFor).Append("\n");
             sb.Append("  ErrorValue: ").Append(ErrorValue).Append("\n");
             sb.Append("  Expression: ").Append(Expression).Append("\n");
             sb.Append("  PythonExpression: ").Append(PythonExpression).Append("\n");
@@ -333,6 +399,8 @@ namespace Moira.ApiClient.Model
             sb.Append("  Ttl: ").Append(Ttl).Append("\n");
             sb.Append("  TtlState: ").Append(TtlState).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
+            sb.Append("  WarnFor: ").Append(WarnFor).Append("\n");
+            sb.Append("  WarnKeepFiringFor: ").Append(WarnKeepFiringFor).Append("\n");
             sb.Append("  WarnValue: ").Append(WarnValue).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -384,6 +452,8 @@ namespace Moira.ApiClient.Model
             Option<string> clusterId = default;
             Option<long?> createdAt = default;
             Option<string> desc = default;
+            Option<long?> errorFor = default;
+            Option<long?> errorKeepFiringFor = default;
             Option<decimal?> errorValue = default;
             Option<string> expression = default;
             Option<string> pythonExpression = default;
@@ -393,6 +463,8 @@ namespace Moira.ApiClient.Model
             Option<long?> ttl = default;
             Option<string> ttlState = default;
             Option<long?> updatedAt = default;
+            Option<long?> warnFor = default;
+            Option<long?> warnKeepFiringFor = default;
             Option<decimal?> warnValue = default;
 
             while (utf8JsonReader.Read())
@@ -449,6 +521,12 @@ namespace Moira.ApiClient.Model
                         case "desc":
                             desc = new Option<string>(utf8JsonReader.GetString());
                             break;
+                        case "error_for":
+                            errorFor = new Option<long?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (long?)null : utf8JsonReader.GetInt64());
+                            break;
+                        case "error_keep_firing_for":
+                            errorKeepFiringFor = new Option<long?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (long?)null : utf8JsonReader.GetInt64());
+                            break;
                         case "error_value":
                             errorValue = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
                             break;
@@ -475,6 +553,12 @@ namespace Moira.ApiClient.Model
                             break;
                         case "updated_at":
                             updatedAt = new Option<long?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (long?)null : utf8JsonReader.GetInt64());
+                            break;
+                        case "warn_for":
+                            warnFor = new Option<long?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (long?)null : utf8JsonReader.GetInt64());
+                            break;
+                        case "warn_keep_firing_for":
+                            warnKeepFiringFor = new Option<long?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (long?)null : utf8JsonReader.GetInt64());
                             break;
                         case "warn_value":
                             warnValue = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
@@ -560,13 +644,25 @@ namespace Moira.ApiClient.Model
             if (clusterId.IsSet && clusterId.Value == null)
                 throw new ArgumentNullException(nameof(clusterId), "Property is not nullable for class MoiraTrigger.");
 
+            if (errorFor.IsSet && errorFor.Value == null)
+                throw new ArgumentNullException(nameof(errorFor), "Property is not nullable for class MoiraTrigger.");
+
+            if (errorKeepFiringFor.IsSet && errorKeepFiringFor.Value == null)
+                throw new ArgumentNullException(nameof(errorKeepFiringFor), "Property is not nullable for class MoiraTrigger.");
+
             if (triggerSource.IsSet && triggerSource.Value == null)
                 throw new ArgumentNullException(nameof(triggerSource), "Property is not nullable for class MoiraTrigger.");
 
             if (ttl.IsSet && ttl.Value == null)
                 throw new ArgumentNullException(nameof(ttl), "Property is not nullable for class MoiraTrigger.");
 
-            return new MoiraTrigger(aloneMetrics.Value, createdBy.Value, id.Value, muteNewMetrics.Value.Value, name.Value, patterns.Value, tags.Value, targets.Value, triggerType.Value, updatedBy.Value, clusterId, createdAt.Value, desc, errorValue.Value, expression, pythonExpression, sched, teamId, triggerSource, ttl, ttlState, updatedAt.Value, warnValue.Value);
+            if (warnFor.IsSet && warnFor.Value == null)
+                throw new ArgumentNullException(nameof(warnFor), "Property is not nullable for class MoiraTrigger.");
+
+            if (warnKeepFiringFor.IsSet && warnKeepFiringFor.Value == null)
+                throw new ArgumentNullException(nameof(warnKeepFiringFor), "Property is not nullable for class MoiraTrigger.");
+
+            return new MoiraTrigger(aloneMetrics.Value, createdBy.Value, id.Value, muteNewMetrics.Value.Value, name.Value, patterns.Value, tags.Value, targets.Value, triggerType.Value, updatedBy.Value, clusterId, createdAt.Value, desc, errorFor, errorKeepFiringFor, errorValue.Value, expression, pythonExpression, sched, teamId, triggerSource, ttl, ttlState, updatedAt.Value, warnFor, warnKeepFiringFor, warnValue.Value);
         }
 
         /// <summary>
@@ -660,6 +756,12 @@ namespace Moira.ApiClient.Model
                 else
                     writer.WriteNull("desc");
 
+            if (moiraTrigger.ErrorForOption.IsSet)
+                writer.WriteNumber("error_for", moiraTrigger.ErrorForOption.Value.Value);
+
+            if (moiraTrigger.ErrorKeepFiringForOption.IsSet)
+                writer.WriteNumber("error_keep_firing_for", moiraTrigger.ErrorKeepFiringForOption.Value.Value);
+
             if (moiraTrigger.ErrorValue != null)
                 writer.WriteNumber("error_value", moiraTrigger.ErrorValue.Value);
             else
@@ -707,6 +809,12 @@ namespace Moira.ApiClient.Model
                 writer.WriteNumber("updated_at", moiraTrigger.UpdatedAt.Value);
             else
                 writer.WriteNull("updated_at");
+
+            if (moiraTrigger.WarnForOption.IsSet)
+                writer.WriteNumber("warn_for", moiraTrigger.WarnForOption.Value.Value);
+
+            if (moiraTrigger.WarnKeepFiringForOption.IsSet)
+                writer.WriteNumber("warn_keep_firing_for", moiraTrigger.WarnKeepFiringForOption.Value.Value);
 
             if (moiraTrigger.WarnValue != null)
                 writer.WriteNumber("warn_value", moiraTrigger.WarnValue.Value);

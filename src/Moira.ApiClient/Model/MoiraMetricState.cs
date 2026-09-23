@@ -37,24 +37,32 @@ namespace Moira.ApiClient.Model
         /// <param name="suppressed">suppressed</param>
         /// <param name="timestamp">timestamp</param>
         /// <param name="deletedButKept">DeletedButKept controls whether the metric is shown to the user if the trigger has ttlState &#x3D; Del and the metric is in Maintenance. The metric remains in the database</param>
+        /// <param name="errorRecoverSince">ErrorRecoverSince is the unix timestamp when the metric first dropped below ErrorValue after ERROR had fired, 0 if not currently tracked.</param>
+        /// <param name="errorSince">ErrorSince is the unix timestamp when the metric first became continuously &gt;&#x3D; ErrorValue, 0 if not currently tracked.</param>
         /// <param name="maintenance">maintenance</param>
         /// <param name="maintenanceInfo">maintenanceInfo</param>
         /// <param name="suppressedState">suppressedState</param>
         /// <param name="value">value</param>
         /// <param name="values">values</param>
+        /// <param name="warnRecoverSince">WarnRecoverSince is the unix timestamp when the metric first dropped below WarnValue after WARN had fired, 0 if not currently tracked.</param>
+        /// <param name="warnSince">AloneMetrics    map[string]string  &#x60;json:\&quot;alone_metrics\&quot;&#x60; // represents a relation between name of alone metrics and their targets WarnSince is the unix timestamp when the metric first became continuously &gt;&#x3D; WarnValue, 0 if not currently tracked.</param>
         [JsonConstructor]
-        public MoiraMetricState(long eventTimestamp, string state, bool suppressed, long timestamp, Option<bool?> deletedButKept = default, Option<long?> maintenance = default, MoiraMaintenanceInfo maintenanceInfo = default, Option<string> suppressedState = default, Option<decimal?> value = default, Option<Dictionary<string, decimal>> values = default)
+        public MoiraMetricState(long eventTimestamp, string state, bool suppressed, long timestamp, Option<bool?> deletedButKept = default, Option<long?> errorRecoverSince = default, Option<long?> errorSince = default, Option<long?> maintenance = default, MoiraMaintenanceInfo maintenanceInfo = default, Option<string> suppressedState = default, Option<decimal?> value = default, Option<Dictionary<string, decimal>> values = default, Option<long?> warnRecoverSince = default, Option<long?> warnSince = default)
         {
             EventTimestamp = eventTimestamp;
             State = state;
             Suppressed = suppressed;
             Timestamp = timestamp;
             DeletedButKeptOption = deletedButKept;
+            ErrorRecoverSinceOption = errorRecoverSince;
+            ErrorSinceOption = errorSince;
             MaintenanceOption = maintenance;
             MaintenanceInfo = maintenanceInfo;
             SuppressedStateOption = suppressedState;
             ValueOption = value;
             ValuesOption = values;
+            WarnRecoverSinceOption = warnRecoverSince;
+            WarnSinceOption = warnSince;
             OnCreated();
         }
 
@@ -102,6 +110,36 @@ namespace Moira.ApiClient.Model
         /* <example>false</example> */
         [JsonPropertyName("deleted_but_kept")]
         public bool? DeletedButKept { get { return this.DeletedButKeptOption; } set { this.DeletedButKeptOption = new Option<bool?>(value); } }
+
+        /// <summary>
+        /// Used to track the state of ErrorRecoverSince
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<long?> ErrorRecoverSinceOption { get; private set; }
+
+        /// <summary>
+        /// ErrorRecoverSince is the unix timestamp when the metric first dropped below ErrorValue after ERROR had fired, 0 if not currently tracked.
+        /// </summary>
+        /// <value>ErrorRecoverSince is the unix timestamp when the metric first dropped below ErrorValue after ERROR had fired, 0 if not currently tracked.</value>
+        /* <example>0</example> */
+        [JsonPropertyName("error_recover_since")]
+        public long? ErrorRecoverSince { get { return this.ErrorRecoverSinceOption; } set { this.ErrorRecoverSinceOption = new Option<long?>(value); } }
+
+        /// <summary>
+        /// Used to track the state of ErrorSince
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<long?> ErrorSinceOption { get; private set; }
+
+        /// <summary>
+        /// ErrorSince is the unix timestamp when the metric first became continuously &gt;&#x3D; ErrorValue, 0 if not currently tracked.
+        /// </summary>
+        /// <value>ErrorSince is the unix timestamp when the metric first became continuously &gt;&#x3D; ErrorValue, 0 if not currently tracked.</value>
+        /* <example>0</example> */
+        [JsonPropertyName("error_since")]
+        public long? ErrorSince { get { return this.ErrorSinceOption; } set { this.ErrorSinceOption = new Option<long?>(value); } }
 
         /// <summary>
         /// Used to track the state of Maintenance
@@ -164,6 +202,36 @@ namespace Moira.ApiClient.Model
         public Dictionary<string, decimal> Values { get { return this.ValuesOption; } set { this.ValuesOption = new Option<Dictionary<string, decimal>>(value); } }
 
         /// <summary>
+        /// Used to track the state of WarnRecoverSince
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<long?> WarnRecoverSinceOption { get; private set; }
+
+        /// <summary>
+        /// WarnRecoverSince is the unix timestamp when the metric first dropped below WarnValue after WARN had fired, 0 if not currently tracked.
+        /// </summary>
+        /// <value>WarnRecoverSince is the unix timestamp when the metric first dropped below WarnValue after WARN had fired, 0 if not currently tracked.</value>
+        /* <example>0</example> */
+        [JsonPropertyName("warn_recover_since")]
+        public long? WarnRecoverSince { get { return this.WarnRecoverSinceOption; } set { this.WarnRecoverSinceOption = new Option<long?>(value); } }
+
+        /// <summary>
+        /// Used to track the state of WarnSince
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<long?> WarnSinceOption { get; private set; }
+
+        /// <summary>
+        /// AloneMetrics    map[string]string  &#x60;json:\&quot;alone_metrics\&quot;&#x60; // represents a relation between name of alone metrics and their targets WarnSince is the unix timestamp when the metric first became continuously &gt;&#x3D; WarnValue, 0 if not currently tracked.
+        /// </summary>
+        /// <value>AloneMetrics    map[string]string  &#x60;json:\&quot;alone_metrics\&quot;&#x60; // represents a relation between name of alone metrics and their targets WarnSince is the unix timestamp when the metric first became continuously &gt;&#x3D; WarnValue, 0 if not currently tracked.</value>
+        /* <example>0</example> */
+        [JsonPropertyName("warn_since")]
+        public long? WarnSince { get { return this.WarnSinceOption; } set { this.WarnSinceOption = new Option<long?>(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -176,11 +244,15 @@ namespace Moira.ApiClient.Model
             sb.Append("  Suppressed: ").Append(Suppressed).Append("\n");
             sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
             sb.Append("  DeletedButKept: ").Append(DeletedButKept).Append("\n");
+            sb.Append("  ErrorRecoverSince: ").Append(ErrorRecoverSince).Append("\n");
+            sb.Append("  ErrorSince: ").Append(ErrorSince).Append("\n");
             sb.Append("  Maintenance: ").Append(Maintenance).Append("\n");
             sb.Append("  MaintenanceInfo: ").Append(MaintenanceInfo).Append("\n");
             sb.Append("  SuppressedState: ").Append(SuppressedState).Append("\n");
             sb.Append("  Value: ").Append(Value).Append("\n");
             sb.Append("  Values: ").Append(Values).Append("\n");
+            sb.Append("  WarnRecoverSince: ").Append(WarnRecoverSince).Append("\n");
+            sb.Append("  WarnSince: ").Append(WarnSince).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -223,11 +295,15 @@ namespace Moira.ApiClient.Model
             Option<bool?> suppressed = default;
             Option<long?> timestamp = default;
             Option<bool?> deletedButKept = default;
+            Option<long?> errorRecoverSince = default;
+            Option<long?> errorSince = default;
             Option<long?> maintenance = default;
             Option<MoiraMaintenanceInfo> maintenanceInfo = default;
             Option<string> suppressedState = default;
             Option<decimal?> value = default;
             Option<Dictionary<string, decimal>> values = default;
+            Option<long?> warnRecoverSince = default;
+            Option<long?> warnSince = default;
 
             while (utf8JsonReader.Read())
             {
@@ -259,6 +335,12 @@ namespace Moira.ApiClient.Model
                         case "deleted_but_kept":
                             deletedButKept = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
+                        case "error_recover_since":
+                            errorRecoverSince = new Option<long?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (long?)null : utf8JsonReader.GetInt64());
+                            break;
+                        case "error_since":
+                            errorSince = new Option<long?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (long?)null : utf8JsonReader.GetInt64());
+                            break;
                         case "maintenance":
                             maintenance = new Option<long?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (long?)null : utf8JsonReader.GetInt64());
                             break;
@@ -273,6 +355,12 @@ namespace Moira.ApiClient.Model
                             break;
                         case "values":
                             values = new Option<Dictionary<string, decimal>>(JsonSerializer.Deserialize<Dictionary<string, decimal>>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "warn_recover_since":
+                            warnRecoverSince = new Option<long?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (long?)null : utf8JsonReader.GetInt64());
+                            break;
+                        case "warn_since":
+                            warnSince = new Option<long?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (long?)null : utf8JsonReader.GetInt64());
                             break;
                         default:
                             break;
@@ -310,6 +398,12 @@ namespace Moira.ApiClient.Model
             if (deletedButKept.IsSet && deletedButKept.Value == null)
                 throw new ArgumentNullException(nameof(deletedButKept), "Property is not nullable for class MoiraMetricState.");
 
+            if (errorRecoverSince.IsSet && errorRecoverSince.Value == null)
+                throw new ArgumentNullException(nameof(errorRecoverSince), "Property is not nullable for class MoiraMetricState.");
+
+            if (errorSince.IsSet && errorSince.Value == null)
+                throw new ArgumentNullException(nameof(errorSince), "Property is not nullable for class MoiraMetricState.");
+
             if (maintenance.IsSet && maintenance.Value == null)
                 throw new ArgumentNullException(nameof(maintenance), "Property is not nullable for class MoiraMetricState.");
 
@@ -319,7 +413,13 @@ namespace Moira.ApiClient.Model
             if (values.IsSet && values.Value == null)
                 throw new ArgumentNullException(nameof(values), "Property is not nullable for class MoiraMetricState.");
 
-            return new MoiraMetricState(eventTimestamp.Value.Value, state.Value, suppressed.Value.Value, timestamp.Value.Value, deletedButKept, maintenance, maintenanceInfo.Value, suppressedState, value, values);
+            if (warnRecoverSince.IsSet && warnRecoverSince.Value == null)
+                throw new ArgumentNullException(nameof(warnRecoverSince), "Property is not nullable for class MoiraMetricState.");
+
+            if (warnSince.IsSet && warnSince.Value == null)
+                throw new ArgumentNullException(nameof(warnSince), "Property is not nullable for class MoiraMetricState.");
+
+            return new MoiraMetricState(eventTimestamp.Value.Value, state.Value, suppressed.Value.Value, timestamp.Value.Value, deletedButKept, errorRecoverSince, errorSince, maintenance, maintenanceInfo.Value, suppressedState, value, values, warnRecoverSince, warnSince);
         }
 
         /// <summary>
@@ -366,6 +466,12 @@ namespace Moira.ApiClient.Model
             if (moiraMetricState.DeletedButKeptOption.IsSet)
                 writer.WriteBoolean("deleted_but_kept", moiraMetricState.DeletedButKeptOption.Value.Value);
 
+            if (moiraMetricState.ErrorRecoverSinceOption.IsSet)
+                writer.WriteNumber("error_recover_since", moiraMetricState.ErrorRecoverSinceOption.Value.Value);
+
+            if (moiraMetricState.ErrorSinceOption.IsSet)
+                writer.WriteNumber("error_since", moiraMetricState.ErrorSinceOption.Value.Value);
+
             if (moiraMetricState.MaintenanceOption.IsSet)
                 writer.WriteNumber("maintenance", moiraMetricState.MaintenanceOption.Value.Value);
 
@@ -390,6 +496,11 @@ namespace Moira.ApiClient.Model
                 writer.WritePropertyName("values");
                 JsonSerializer.Serialize(writer, moiraMetricState.Values, jsonSerializerOptions);
             }
+            if (moiraMetricState.WarnRecoverSinceOption.IsSet)
+                writer.WriteNumber("warn_recover_since", moiraMetricState.WarnRecoverSinceOption.Value.Value);
+
+            if (moiraMetricState.WarnSinceOption.IsSet)
+                writer.WriteNumber("warn_since", moiraMetricState.WarnSinceOption.Value.Value);
         }
     }
 }

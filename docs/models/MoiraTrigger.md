@@ -17,6 +17,8 @@ Name | Type | Description | Notes
 **ClusterId** | **string** |  | [optional] 
 **CreatedAt** | **long** |  | 
 **Desc** | **string** |  | [optional] 
+**ErrorFor** | **long** |  | [optional] 
+**ErrorKeepFiringFor** | **long** |  | [optional] 
 **ErrorValue** | **decimal** |  | 
 **Expression** | **string** |  | [optional] 
 **PythonExpression** | **string** |  | [optional] 
@@ -26,6 +28,8 @@ Name | Type | Description | Notes
 **Ttl** | **long** |  | [optional] 
 **TtlState** | **string** |  | [optional] 
 **UpdatedAt** | **long** |  | 
+**WarnFor** | **long** |  | [optional] 
+**WarnKeepFiringFor** | **long** |  | [optional] 
 **WarnValue** | **decimal** |  | 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)

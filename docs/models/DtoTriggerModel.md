@@ -20,12 +20,16 @@ Name | Type | Description | Notes
 **UpdatedBy** | **string** | Username who updated trigger | 
 **CreatedAt** | **string** | Datetime when the trigger was created | 
 **Desc** | **string** | Description string | [optional] 
+**ErrorFor** | **long** | Seconds the metric must be continuously &gt;&#x3D; ErrorValue before ERROR fires. 0 means fire instantly. | [optional] 
+**ErrorKeepFiringFor** | **long** | Seconds to keep reporting ERROR after the metric drops below ErrorValue. 0 means resolve instantly. | [optional] 
 **ErrorValue** | **decimal** | ERROR threshold | 
 **Sched** | [**MoiraScheduleData**](MoiraScheduleData.md) |  | [optional] 
 **TeamId** | **string** | ID of a Team that owns this trigger | [optional] 
 **Ttl** | **long** | When there are no metrics for trigger, Moira will switch metric to TTLState state after TTL seconds | [optional] 
 **TtlState** | **string** | When there are no metrics for trigger, Moira will switch metric to TTLState state after TTL seconds | [optional] 
 **UpdatedAt** | **string** | Datetime  when the trigger was updated | 
+**WarnFor** | **long** | Seconds the metric must be continuously &gt;&#x3D; WarnValue before WARN fires. 0 means fire instantly. | [optional] 
+**WarnKeepFiringFor** | **long** | Seconds to keep reporting WARN after the metric drops below WarnValue. 0 means resolve instantly. | [optional] 
 **WarnValue** | **decimal** | WARN threshold | 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
